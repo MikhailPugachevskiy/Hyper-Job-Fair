@@ -1,0 +1,13 @@
+footer {
+    background: #e0e0e0;
+    text-align: center;
+    padding: 1.5rem;
+    color: #555;
+    border-top: 2px solid #ccc;
+    margin-top: 2rem;
+}
+
+footer p:first-child {
+    font-weight: 500;
+    color: #333;
+}
