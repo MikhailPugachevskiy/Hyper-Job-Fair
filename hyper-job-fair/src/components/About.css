@@ -1,0 +1,79 @@
+.about .intro {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-bottom: 2rem;
+    background: #eef8f6;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+}
+
+.five-is {
+    margin: 2.5rem 0;
+}
+
+.is-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+.is-card {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s;
+}
+
+.is-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 180, 160, 0.15);
+}
+
+.is-card .icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.is-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: #008c7a;
+}
+
+.is-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin: 1rem 0;
+}
+
+.cluster-hint {
+    background: #f0faf8;
+    padding: 0.8rem 1.2rem;
+    border-radius: 30px;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.value ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.value li {
+    background: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
