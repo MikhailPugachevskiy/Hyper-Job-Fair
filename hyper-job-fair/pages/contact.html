@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt – Hyper Job Fair</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">🔷 Hyper Job Fair</div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="matching.html">Matching-Demo</a>
+            <a href="journey.html">Customer Journey</a>
+            <a href="contact.html" class="active">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Kontakt</h1>
+        <p class="sub">Du hast Fragen, Ideen oder möchtest mit uns kooperieren? Schreib uns!</p>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="card">
+                    <h3>📧 E-Mail</h3>
+                    <p>team@hyperjobfair.de</p>
+                </div>
+                <div class="card">
+                    <h3>📍 Standort</h3>
+                    <p>Köln, Deutschland (virtuell überall erreichbar)</p>
+                </div>
+                <div class="card">
+                    <h3>🌐 Social Media</h3>
+                    <p>#HyperJobFair – folge uns auf LinkedIn und Instagram!</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div id="successMessage" style="display:none;" class="success-message">
+                    ✅ Vielen Dank! Wir melden uns bei dir.
+                </div>
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <label>Dein Name</label>
+                    <input type="text" name="name" required>
+
+                    <label>Deine E-Mail</label>
+                    <input type="email" name="email" required>
+
+                    <label>Nachricht</label>
+                    <textarea name="message" rows="5" required></textarea>
+
+                    <button type="submit">Absenden</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hyper Job Fair – Personalisierte Jobmesse neu gedacht.</p>
+        <p>Basierend auf dem Konzept der 5I's (Identifikation, Individualisierung, Interaktion, Integration,
+            Integrität).</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+                document.getElementById('contactForm').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }, 4000);
+        }
+    </script>
+</body>
+
+</html>
