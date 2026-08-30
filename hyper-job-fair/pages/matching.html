@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching-Demo – Hyper Job Fair</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/matching.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">🔷 Hyper Job Fair</div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="matching.html" class="active">Matching-Demo</a>
+            <a href="journey.html">Customer Journey</a>
+            <a href="contact.html">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Matching-Demo</h1>
+        <p class="demo-hint">👆 Swipe nach rechts, wenn dich der Job interessiert – nach links, wenn nicht.</p>
+
+        <div id="matchingApp">
+            <div class="card-stack">
+                <div id="jobCard" class="job-card">
+                    <!-- Wird von JavaScript befüllt -->
+                </div>
+            </div>
+
+            <div class="swipe-buttons">
+                <button class="swipe-left" onclick="handleSwipe('left')">👈 Nicht interessiert</button>
+                <button class="swipe-right" onclick="handleSwipe('right')">👉 Interessiert</button>
+            </div>
+
+            <div id="progress" class="progress">1 von 5 Angeboten</div>
+        </div>
+
+        <div id="resultContainer" style="display:none;">
+            <!-- Wird von JavaScript befüllt -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hyper Job Fair – Personalisierte Jobmesse neu gedacht.</p>
+        <p>Basierend auf dem Konzept der 5I's (Identifikation, Individualisierung, Interaktion, Integration,
+            Integrität).</p>
+    </footer>
+
+    <script src="../js/matching.js"></script>
+</body>
+
+</html>
