@@ -1,0 +1,77 @@
+.sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.phase-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.phase-tabs button {
+    background: #e8e8e8;
+    color: #333;
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 500;
+}
+
+.phase-tabs button.active {
+    background: #00b4a0;
+    color: white;
+}
+
+.phase-content {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    margin-bottom: 2rem;
+    min-height: 200px;
+}
+
+.phase-content ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.phase-content li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.phase-content li:last-child {
+    border-bottom: none;
+}
+
+.example {
+    margin-top: 1rem;
+    background: #f5fcf9;
+    padding: 0.8rem 1.2rem;
+    border-radius: 30px;
+    color: #008c7a;
+    font-style: italic;
+}
+
+.journey-visual {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.milestone {
+    background: #00b4a0;
+    color: white;
+    padding: 0.6rem 1.8rem;
+    border-radius: 40px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
