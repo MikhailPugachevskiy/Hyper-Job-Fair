@@ -1,0 +1,138 @@
+.demo-hint {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.card-stack {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.job-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8e8e8;
+    transition: transform 0.2s;
+    min-height: 280px;
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.company {
+    font-weight: 600;
+    color: #008c7a;
+    font-size: 1.2rem;
+}
+
+.match-badge {
+    background: #e0f5f0;
+    color: #008c7a;
+    padding: 0.2rem 1rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.job-card h3 {
+    margin: 0.4rem 0;
+}
+
+.job-card p {
+    color: #555;
+    margin: 0.8rem 0;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: #f0f0f0;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.swipe-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.swipe-left {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.swipe-left:hover {
+    background: #ccc;
+}
+
+.swipe-right {
+    background: #00b4a0;
+}
+
+.swipe-right:hover {
+    background: #008c7a;
+}
+
+.progress {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.result-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.result-lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.result-lists ul {
+    list-style: none;
+    padding: 0;
+}
+
+.result-lists li {
+    background: #f9f9f9;
+    margin: 0.3rem 0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 500px) {
+    .result-lists {
+        grid-template-columns: 1fr;
+    }
+
+    .job-card {
+        padding: 1.2rem;
+    }
+}
