@@ -31,6 +31,7 @@
     padding: 1.5rem 2rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
     margin-bottom: 2rem;
+    min-height: 200px;
 }
 
 .phase-card ul {
