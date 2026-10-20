@@ -46,14 +46,14 @@ function Contact() {
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit}>
-                            <label>Dein Name</label>
-                            <input type="text" name="name" value={form.name} onChange={handleChange} required />
+                            <label htmlFor="name">Dein Name</label>
+                            <input type="text" id="name" name="name" value={form.name} onChange={handleChange} required />
 
-                            <label>Deine E-Mail</label>
-                            <input type="email" name="email" value={form.email} onChange={handleChange} required />
+                            <label htmlFor="email">Deine E-Mail</label>
+                            <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
 
-                            <label>Nachricht</label>
-                            <textarea name="message" rows="5" value={form.message} onChange={handleChange} required></textarea>
+                            <label htmlFor="message">Nachricht</label>
+                            <textarea id="message" name="message" rows="5" value={form.message} onChange={handleChange} required></textarea>
 
                             <button type="submit">Absenden</button>
                         </form>
