@@ -65,3 +65,16 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Barrierefreiheit: Fokus-Stile für Formularfelder */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #00b4a0;
+    box-shadow: 0 0 0 2px rgba(0, 180, 160, 0.2);
+}
+
+/* Textarea nur vertikal skalierbar */
+.contact-form textarea {
+    resize: vertical;
+}
