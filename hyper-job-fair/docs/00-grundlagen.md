@@ -42,3 +42,43 @@ Eine Komponente darf nur **ein** Wurzelelement zurückgeben. Wenn man mehrere Ge
 ## 4. Der Aufbau des Projekts
 
 Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt nur eine einzige HTML-Datei (`index.html`). Wenn der Nutzer auf „About" klickt, wird die Seite **nicht** neu geladen. Stattdessen tauscht React im Hintergrund nur die Komponente aus, die im `<main>`-Bereich angezeigt wird.
+
+
+**Das wichtigste Prinzip:** Der Zustand (z.B. „welcher Tab ist offen?" oder „welche Jobs habe ich geliked?") liegt immer in der Komponente, die ihn braucht. Er wird nicht global gespeichert, sondern lokal in der jeweiligen Page. Wenn der Nutzer die Seite wechselt, wird der State zurückgesetzt – das ist bei einer Demo völlig ausreichend.
+
+---
+
+## Datei: `index.html` (Einstieg)
+
+```html
+  1 | <!doctype html>
+  2 | <html lang="de">
+  3 |   <head>
+  4 |     <meta charset="UTF-8" />
+  5 |     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  6 |     <meta name="description" content="Hyper Job Fair – Die hyper-personalisierte digitale Jobmesse mit Matching, Chat und individuellem Feedback." />
+  7 |     <title>Hyper Job Fair – Die personalisierte Jobmesse</title>
+  8 |   </head>
+  9 |   <body>
+ 10 |     <div id="root"></div>
+ 11 |     <script type="module" src="/src/main.jsx"></script>
+ 12 |   </body>
+ 13 | </html>
+
+Z. 1 Sagt dem Browser, dass es sich um eine HTML5-Datei handelt.
+
+Z. 2 Das lang="de"-Attribut teilt Screenreadern und Suchmaschinen mit, dass die Seite auf Deutsch ist (wichtig für Barrierefreiheit und SEO).
+
+Z. 3–8 Der <head>-Bereich enthält Metadaten, die nicht direkt auf der Seite sichtbar sind.
+
+Z. 4 Stellt sicher, dass Umlaute (ä, ö, ü) und Sonderzeichen (€) korrekt dargestellt werden (UTF-8).
+
+Z. 5 Sorgt dafür, dass die Seite auf mobilen Geräten (Smartphones, Tablets) richtig skaliert wird, anstatt verkleinert dargestellt zu werden.
+
+Z. 6 Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen.
+
+Z. 7 Der Text, der im Browser-Tab angezeigt wird.
+
+Z. 10 Das ist der wichtigste Teil! Hier ist ein leerer <div> mit der ID root. React sucht dieses Element und fügt die gesamte App dort ein. Wenn dieser <div> fehlt, bleibt die Seite leer.
+
+Z. 11 Lädt die Datei main.jsx. Das type="module" sagt dem Browser, dass er die Datei als JavaScript-Modul behandeln soll (wichtig für import/export). Der Pfad beginnt mit /, was bedeutet: relativ zum Projekt-Root.
