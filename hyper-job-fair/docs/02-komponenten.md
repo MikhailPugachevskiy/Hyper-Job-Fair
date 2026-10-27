@@ -80,6 +80,26 @@ Z. 7 Ein zweiter Absatz mit dem Hinweis auf das 5I-Modell.
 Z. 12 Der Export, damit die Komponente in App.jsx verwendet werden kann.
 
 
+Wie CSS in React funktioniert
+
+In React ist es üblich, CSS-Dateien direkt in die Komponente zu importieren, die sie braucht:
+import './Header.css' // in Header.jsx
+import './Footer.css' // in Footer.jsx
+
+Das unterscheidet sich von normalem HTML (wo man <link>-Tags im <head> benutzt). In React übernimmt der Bundler (Vite), was wohin gehört.
+
+
+Wichtig zu wissen:
+
+    Wenn Vite das Projekt baut, fügt es alle importierten CSS-Dateien zu einer einzigen großen CSS-Datei zusammen.
+
+    Es gibt in diesem Projekt kein CSS-Scoping (wie CSS Modules). Die Klassen .logo, .card etc. sind global verfügbar. Wenn zwei Komponenten dieselbe Klasse verwenden (z.B. .card), teilen sie sich die Styles.
+
+    Deshalb haben wir in den Komponenten spezifische Klassen (z.B. .features .card in Home.css), um Konflikte zu vermeiden.
+
+Fazit zu CSS in React:
+In React importiert man CSS-Dateien in die Komponenten (z.B. import './Header.css'). Vite fasst sie beim Bauen zusammen. Die Styles sind global – deshalb sollte man eindeutige Klassennamen verwenden.
+
 
 Typische Fragen
 
@@ -90,6 +110,7 @@ Typische Fragen
     Kann ich CSS auch direkt in JSX schreiben? Ja, mit dem style-Attribut. Aber das ist oft unübersichtlich, weil man ein Objekt übergeben muss (z.B. style={{ color: 'red' }}). In diesem Projekt verwenden wir externe CSS-Dateien, was wartbarer ist.
 
     Warum heißt die CSS-Datei Header.css und nicht header.css? Konvention: Komponenten-Dateien beginnen mit Großbuchstaben (Header.jsx), also benennt man die zugehörige CSS-Datei genauso. Das macht die Struktur übersichtlich.
+    
 
 Mach es selbst
 
