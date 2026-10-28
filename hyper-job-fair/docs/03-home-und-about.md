@@ -99,4 +99,131 @@ Z. 39, 43, 47 Die Zahl selbst steht in einem <span>-Element. Das ist wichtig, we
 Z. 40, 44, 48 Die Beschreibung der Zahl steht in einem <p>.
 
 
+## Datei: `src/pages/About.jsx` (Über uns)
 
+```jsx
+  1 | import './About.css'
+  2 |
+  3 | function About() {
+  4 |     return (
+  5 |         <div className="about">
+  6 |             <h1>Über Hyper Job Fair</h1>
+  7 |             <p className="intro">
+  8 |                 Wir revolutionieren die klassische Jobmesse mit einem hyper-personalisierten Ansatz.
+  9 |                 Basierend auf dem <strong>5I's-Modell</strong> schaffen wir eine Plattform, die
+ 10 |                 Studierende und Arbeitgeber optimal zusammenbringt.
+ 11 |             </p>
+ 12 |
+ 13 |             <section className="five-is">
+ 14 |                 <h2>Die 5 I's der Hyper-Personalization</h2>
+ 15 |                 <div className="is-grid">
+ 16 |                     <div className="is-card">
+ 17 |                         <span className="icon">🔍</span>
+ 18 |                         <h3>Identification</h3>
+ 19 |                         <p>Erfassung von Profildaten (LinkedIn, Orientierungstest) – die Basis für personalisierte Empfehlungen.</p>
+ 20 |                     </div>
+ 21 |                     <div className="is-card">
+ 22 |                         <span className="icon">🎯</span>
+ 23 |                         <h3>Individualization</h3>
+ 24 |                         <p>Matching-Algorithmus und individuelle Feedbackschleifen – jedes Erlebnis ist einzigartig.</p>
+ 25 |                     </div>
+ 26 |                     <div className="is-card">
+ 27 |                         <span className="icon">💬</span>
+ 28 |                         <h3>Interaction</h3>
+ 29 |                         <p>Chat, Social Contests, Live-Polls – echte Begegnungen digital und vor Ort.</p>
+ 30 |                     </div>
+ 31 |                     <div className="is-card">
+ 32 |                         <span className="icon">🔗</span>
+ 33 |                         <h3>Integration</h3>
+ 34 |                         <p>Nahtlose Einbindung in den gesamten Customer Journey – von der Vorbereitung bis zum Follow-up.</p>
+ 35 |                     </div>
+ 36 |                     <div className="is-card">
+ 37 |                         <span className="icon">🛡️</span>
+ 38 |                         <h3>Integrity</h3>
+ 39 |                         <p>GDPR-konform, transparente Datenverarbeitung und vollständige Kontrolle für die Nutzer.</p>
+ 40 |                     </div>
+ 41 |                 </div>
+ 42 |             </section>
+ 43 |
+ 44 |             <section className="target">
+ 45 |                 <h2>Unsere Zielgruppen</h2>
+ 46 |                 <div className="target-grid">
+ 47 |                     <div className="card">
+ 48 |                         <h3>🎓 Studierende &amp; Absolventen</h3>
+ 49 |                         <p>Unter 30 Jahren, aus aller Welt, auf der Suche nach dem ersten Job oder Praktikum.</p>
+ 50 |                     </div>
+ 51 |                     <div className="card">
+ 52 |                         <h3>🏢 Unternehmen</h3>
+ 53 |                         <p>Die passenden Talente finden – effizient, datenbasiert und mit echtem menschlichen Kontakt.</p>
+ 54 |                     </div>
+ 55 |                 </div>
+ 56 |                 <p className="cluster-hint">
+ 57 |                     <strong>3 Cluster</strong> wurden identifiziert: <em>The Networkers</em> (21,5 %),
+ 58 |                     <em>Involved</em> (47 %) und <em>I don't care</em> (31,4 %). Wir fokussieren die Involved und Networkers.
+ 59 |                 </p>
+ 60 |             </section>
+ 61 |
+ 62 |             <section className="value">
+ 63 |                 <h2>Unsere Versprechen</h2>
+ 64 |                 <ul>
+ 65 |                     <li><strong>💸 Cheap:</strong> Bezahlung nur bei erfolgreicher Vermittlung – für Studierende kostenfrei.</li>
+ 66 |                     <li><strong>⚡ Flawless:</strong> Reibungslose Prozesse, digitale Wartelisten, Orientierungstests.</li>
+ 67 |                     <li><strong>🔒 Secure:</strong> Höchste Datenschutzstandards (GDPR) – jederzeit löschbare Daten.</li>
+ 68 |                 </ul>
+ 69 |             </section>
+ 70 |         </div>
+ 71 |     )
+ 72 | }
+ 73 |
+ 74 | export default About
+
+
+     Z. 1 Importiert die spezifischen Styles für die About-Seite.
+
+    Z. 5 Der äußere Wrapper mit der Klasse about. Er dient wieder als „Anker" für die Styles (z.B. .about .intro).
+
+    Z. 6 Die Hauptüberschrift.
+
+    Z. 7–11 Der Einleitungsabsatz. In Z. 9 wird das <strong>-Tag verwendet, um „5I's-Modell" fett darzustellen.
+
+    Z. 13 Der Bereich für die 5 I's.
+
+    Z. 14 Eine Unterüberschrift (<h2>).
+
+    Z. 15 Ein Container für das Grid (in About.css als CSS-Grid definiert). Dadurch werden die fünf Karten automatisch nebeneinander (und bei wenig Platz untereinander) angeordnet.
+
+    Z. 16–20 Die erste Karte (Identification). Jede Karte hat ein Icon (als Emoji), eine Überschrift (<h3>) und einen Beschreibungstext (<p>).
+
+    Z. 21–40 Die restlichen vier Karten. Sie folgen exakt demselben Muster.
+
+    Z. 44–60 Der Bereich für die Zielgruppen.
+
+    Z. 46 Ein Grid für die beiden Zielgruppen-Karten.
+
+    Z. 56–59 Ein besonderer Absatz (.cluster-hint), der in About.css als „Pill" (abgerundeter Balken) gestaltet ist. Hier werden <strong> (fett) und <em> (kursiv) kombiniert, um die Cluster-Namen hervorzuheben.
+
+    Z. 62–69 Der Bereich für die Versprechen.
+
+    Z. 64 Eine ungeordnete Liste (<ul>).
+
+    Z. 65–67 Die drei Listeneinträge (<li>). In About.css ist definiert, dass diese Liste keine Punkte (Bullets) hat und stattdessen jeder Eintrag wie eine kleine Karte aussieht.
+
+Typische Fragen
+
+    Warum verwenden wir <section> und nicht einfach nur <div>? <section> ist semantisch bedeutungsvoller. Ein Screenreader kann daraus schließen, dass es sich um einen eigenständigen inhaltlichen Abschnitt handelt. Ein <div> hat keine semantische Bedeutung.
+
+    Was ist der Unterschied zwischen <strong> und <b>? <strong> bedeutet „wichtiger Inhalt" und wird von Screenreadern betont vorgelesen. <b> ist nur „fett" (rein visuell). In modernem HTML bevorzugt man <strong>.
+
+    Warum schreiben wir &amp; statt &? In JSX (und HTML) ist das kaufmännische Und ein Sonderzeichen. In den meisten Fällen funktioniert auch ein einfaches &, aber &amp; ist der standardisierte Weg und vermeidet Fehler, falls der Code in anderen Kontexten (z.B. in Attributen oder in XML) verwendet wird.
+
+    Wie funktioniert das Grid in About.css ohne Media Query? Durch grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)). Das bedeutet: „Erzeuge so viele Spalten wie möglich, jede mindestens 180px breit, und verteile den restlichen Platz gleichmäßig (1fr)." Wenn der Bildschirm schmaler wird, brechen die Karten automatisch in die nächste Zeile um. Das ist ein sehr elegantes, responsives Muster.
+
+    Warum gibt es in About.jsx keine useState- oder useEffect-Hooks? Weil diese Seite rein statisch ist. Sie zeigt nur Inhalte an und hat keine Interaktion, die einen Zustand erfordern würde.
+
+Mach es selbst
+
+    Ändere in Home.jsx die Zahl 79+ auf 100+. Was siehst du? (Die Zahl in der Statistik wird aktualisiert.)
+
+    Füge in About.jsx einen sechsten is-card-Block hinzu (z.B. mit dem Icon „🚀" und dem Titel „Innovation"). Was passiert mit dem Layout? (Das Grid passt sich automatisch an – die Karten werden etwas schmaler oder rutschen in die nächste Zeile.)
+
+    Ändere in Home.css die Hintergrundfarbe des .hero-Bereichs auf #000000 (schwarz). Was passiert mit dem Text? (Du wirst sehen, dass der Text plötzlich schwer lesbar ist – warum? Weil die Textfarbe in App.css dunkelgrau ist. Das ist ein gutes Beispiel dafür, warum man Kontraste immer prüfen sollte.)
