@@ -99,4 +99,51 @@ Das ist ein sehr mächtiger Einzeiler. Er bedeutet:
 Was passiert also auf einem schmalen Bildschirm? Wenn nicht mehr genug Platz für zwei Karten à 220px ist, bricht das Grid automatisch auf eine Spalte um. Das ist ein vollständig responsives Layout ohne eine einzige Media Query!
 
 
+Media Queries (für den Feinschliff)
 
+Media Queries werden nur an wenigen Stellen verwendet, um das Layout für sehr kleine Bildschirme (Smartphones) anzupassen. Ein Beispiel aus 
+Header.css:
+
+@media (max-width: 700px) {
+    header {
+        flex-direction: column; /* Logo und Navigation untereinander */
+        padding: 0.8rem;
+    }
+    nav {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap; /* Navigation umbricht bei Platzmangel */
+        justify-content: center;
+    }
+}
+
+max-width: 700px: Diese Regel gilt nur, wenn der Bildschirm schmaler als 700px ist.
+
+flex-direction: column: Ändert die Richtung von „nebeneinander" zu „untereinander". Das ist auf schmalen Bildschirmen besser lesbar.
+
+
+
+Neben den großen Layouts gibt es ein paar Details, die dem Projekt seinen Charakter geben:
+Die „Pill"-Form
+
+Viele Elemente (Buttons, Tags, aktive Tabs) haben eine stark abgerundete Form. Das wird durch einen großen border-radius erreicht:
+
+button {
+    border-radius: 30px; /* Halb so hoch wie der Button = perfekte Pillenform */
+}
+
+
+
+Der Hover-Effekt bei Karten
+
+Die Karten in Home.css und About.css heben sich leicht an, wenn man mit der Maus darüber fährt:
+
+```css
+.features .card:hover {
+    transform: translateY(-4px);
+    transition: transform 0.2s; /* Sorgt für eine weiche Animation */
+}
+
+translateY(-4px): Verschiebt die Karte um 4 Pixel nach oben. Das erzeugt den Eindruck, als würde sie schweben.
+
+transition: Sorgt dafür, dass diese Bewegung nicht ruckartig, sondern fließend (über 0.2 Sekunden) passiert.
