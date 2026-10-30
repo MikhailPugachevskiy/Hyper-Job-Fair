@@ -123,4 +123,52 @@ Der komplette Inhalt einer Phase (Beispiel)
  48 |                     </div>
  49 |                 )}
 
- 
+    Z. 37 Ein <div> mit der Klasse phase-card. In CustomerJourney.css definiert sie das Aussehen der weißen Karte.
+
+    Z. 38 Die Überschrift der Phase.
+
+    Z. 39–44 Eine Liste mit den vier wichtigsten Features dieser Phase. Jedes <li> enthält ein <strong>-Tag, um den Feature-Namen hervorzuheben.
+
+    Z. 45–47 Ein Beispiel-Block. Die Klasse .example stylt ihn als abgerundete Box in hellgrün mit kursiver Schrift.
+
+Dieses Muster wiederholt sich exakt für die anderen beiden Phasen (during und after). Der einzige Unterschied sind die Texte.
+
+
+Die drei „Milestones" am Ende
+
+```jsx
+ 60 |             <div className="journey-visual">
+ 61 |                 <div className="milestone">1. Cheap</div>
+ 62 |                 <div className="milestone">2. Flawless</div>
+ 63 |                 <div className="milestone">3. Secure</div>
+ 64 |             </div>
+
+Z. 60 Ein Container für die drei „Versprechen" (Milestones).
+
+Z. 61–63 Drei <div>-Elemente mit der Klasse milestone. In CustomerJourney.css sind sie als türkise Pill-Buttons gestaltet.
+
+Wichtig: Diese drei Milestones sind nicht vom activePhase-State abhängig. Sie sind immer sichtbar, egal welcher Tab gerade aktiv ist. Das ist eine Design-Entscheidung: Die Versprechen gelten für alle Phasen gleichermaßen.
+
+
+Typische Fragen
+
+    Warum verwenden wir && und nicht ein if? In JSX können wir keine if-Anweisungen direkt schreiben (nur innerhalb von { } als Ausdruck). && ist ein logischer Operator und funktioniert als Ausdruck: „Wenn links true ist, gib rechts zurück, sonst gib links (false) zurück." React rendert false als nichts (es erscheint nicht im DOM).
+
+    Könnte man auch activePhase === 'before' ? (...) : null schreiben? Ja, das ist funktional identisch. && ist nur die kürzere Schreibweise, wenn es keinen else-Fall gibt.
+
+    Warum steht der useState-Aufruf am Anfang der Komponente? React hat eine Regel: Hooks (wie useState) müssen immer in derselben Reihenfolge aufgerufen werden. Deshalb dürfen sie nicht in if-Blöcken oder Schleifen stehen. Indem wir sie ganz oben platzieren, garantieren wir, dass sie bei jedem Rendern in derselben Reihenfolge ausgeführt werden.
+
+    Was passiert, wenn wir den State auf einen Wert setzen, den es nicht gibt (z.B. 'test')? Dann wäre keine der drei Bedingungen (=== 'before', === 'during', === 'after') wahr. Es würde kein Inhalt angezeigt werden. Der Code würde nicht abstürzen, aber der Nutzer sähe nur die Tabs und die Milestones ohne Inhalt. (Deshalb ist es wichtig, den State nur mit den erlaubten Werten zu setzen.)
+
+    Was ist der Unterschied zwischen diesem State und dem State in der Matching-Demo? In der Matching-Demo gab es vier States, die sich unabhängig voneinander ändern konnten (Index, Matches, No-Matches, Finished). Hier gibt es nur einen State, der immer genau einen von drei Werten hat. Das ist ein schönes Beispiel dafür, dass man den State so einfach wie möglich halten sollte.
+
+
+Mach es selbst
+
+    Ändere den Startwert von activePhase auf 'during'. Welcher Tab ist beim Laden der Seite aktiv?
+
+    Füge einen vierten Tab hinzu (z.B. mit data-phase="extra" und einem neuen Button). Was passiert, wenn du ihn anklickst? (Du siehst keinen Inhalt, weil es keinen {activePhase === 'extra' && (...)}-Block gibt.)
+
+    Ändere in CustomerJourney.css die Farbe der aktiven Tabs (background: #00b4a0;) auf #ef4444 (rot). Was passiert?
+
+    Überlege: Warum ist es besser, einen einzigen State (activePhase) zu verwenden, anstatt drei separate (showBefore, showDuring, showAfter)? (Weil man so nicht versehentlich zwei Tabs gleichzeitig aktiv haben kann. Der Zustand ist eindeutig.)
