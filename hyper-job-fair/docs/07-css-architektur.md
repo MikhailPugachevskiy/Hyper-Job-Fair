@@ -147,3 +147,37 @@ Die Karten in Home.css und About.css heben sich leicht an, wenn man mit der Maus
 translateY(-4px): Verschiebt die Karte um 4 Pixel nach oben. Das erzeugt den Eindruck, als würde sie schweben.
 
 transition: Sorgt dafür, dass diese Bewegung nicht ruckartig, sondern fließend (über 0.2 Sekunden) passiert.
+
+
+
+Schatten für Tiefe
+
+Die Karten und der Header haben leichte Schatten, um sich vom Hintergrund abzuheben:
+
+.card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+0 4px 12px: Der Schatten ist 0px nach rechts, 4px nach unten verschoben und 12px „weichgezeichnet" (Blur).
+
+rgba(0, 0, 0, 0.05): Eine sehr transparente schwarze Farbe (nur 5% Deckkraft). Das erzeugt einen dezenten, natürlichen Schatten.
+
+
+
+Typische Fragen
+
+    Warum nicht einfach ein großes CSS-Framework wie Tailwind oder Bootstrap verwenden? Frameworks sind schnell, aber sie bringen einen eigenen Look und viel „unnötigen" Code mit. Für dieses Projekt wollten wir ein eigenes, maßgeschneidertes Design (das türkis-grüne Farbschema der Koelnmesse) und den Code so klein und verständlich wie möglich halten.
+
+    Könnte man das CSS auch in die JSX-Dateien schreiben (CSS-in-JS)? Ja, Bibliotheken wie styled-components machen das. Aber wir wollten den klassischen Weg gehen (externe CSS-Dateien), weil er für Einsteiger leichter zu verstehen ist und dem Standard in vielen Unternehmen entspricht.
+
+    Was ist der Vorteil von rem gegenüber px? rem bezieht sich auf die Schriftgröße des Wurzelelements (normalerweise 16px). Wenn der Nutzer die Schriftgröße in seinem Browser vergrößert (Barrierefreiheit), skalieren rem-Werte automatisch mit, px-Werte nicht.
+
+    Warum steht in App.css ein *-Selektor ganz am Anfang? Das ist ein „Reset". Es setzt die Standardabstände (margin, padding) aller Elemente auf 0 und sorgt dafür, dass Breiten und Höhen so berechnet werden, wie man es erwartet (box-sizing: border-box). Das ist ein Standard, der in fast jedem modernen Webprojekt verwendet wird.
+
+Mach es selbst
+
+    Ändere in App.css die Hauptfarbe #00b4a0 auf ein kräftiges Lila (z.B. #8b5cf6). Was passiert mit den Buttons, Tabs und Icons? (Du siehst, wie mächtig die zentrale Farbdefinition ist – ein Wert ändert das gesamte Design.)
+
+    Ändere in Home.css den Wert minmax(220px, 1fr) auf minmax(150px, 1fr). Was passiert auf einem mittelgroßen Bildschirm? (Es passen mehr Karten in eine Reihe.)
+
+    Entferne in Header.css das @media (max-width: 700px)-Block. Verkleinere dein Browserfenster auf Handy-Größe. Was passiert? (Die Navigation wird abgeschnitten oder passt nicht mehr – genau deshalb brauchen wir die Media Query.)
