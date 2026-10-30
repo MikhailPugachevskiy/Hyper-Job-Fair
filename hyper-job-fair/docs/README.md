@@ -41,3 +41,17 @@ Voraussetzung: [Node.js](https://nodejs.org/) muss auf dem System installiert se
 1. Repository klonen:
    ```bash
    git clone https://github.com/MikhailPugachevskiy/Hyper-Job-Fair.git
+
+2. In den Projektordner wechseln:
+   ```bash
+   cd Hyper-Job-Fair/hyper-job-fair
+
+3. Abhängigkeiten installieren:
+   ```bash
+   npm install
+
+4. Entwicklungsserver starten:
+   ```bash
+   npm run dev
+
+5. Die Webseite ist nun unter http://localhost:5173/ erreichbar.
