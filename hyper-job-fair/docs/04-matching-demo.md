@@ -4,6 +4,8 @@ Bisher waren die Seiten hauptsächlich statisch (Home, About). In der **Matching
 
 Dieses Kapitel ist das Wichtigste für dein React-Verständnis. Es zeigt dir, wie man mit **State** (Zustand) arbeitet, wie man auf **Events** (Ereignisse wie Klicks) reagiert und wie man **Listen** rendert.
 
+> **Hinweis:** Die Codeausschnitte in diesem Kapitel sind gekürzt. Die Jobdaten und die Ergebnisansicht sind durch `...` bzw. Kommentare ersetzt, damit der Fokus auf State und Events liegt.
+
 ---
 
 ## Die Grundidee: State (`useState`)
@@ -14,11 +16,10 @@ Der Hook `useState` löst dieses Problem. Er ist das „Gedächtnis" der Kompone
 
 ```jsx
 const [wert, setWert] = useState(0)
+```
 
-wert: Der aktuelle Wert (wird zum Anzeigen genutzt).
-
-setWert: Die Funktion, um den Wert zu ändern und ein Neuzeichnen auszulösen.
-
+- `wert`: der aktuelle Wert (wird zum Anzeigen genutzt).
+- `setWert`: die Funktion, um den Wert zu ändern und ein Neuzeichnen auszulösen.
 
 ---
 
@@ -66,56 +67,40 @@ setWert: Die Funktion, um den Wert zu ändern und ein Neuzeichnen auszulösen.
  39 |     }
  40 |
  41 |     if (finished) {
- 42 |         return ( /* ... Ergebnisansicht ... */ )
+ 42 |         return ( /* ... Ergebnisansicht (gekürzt) ... */ )
  43 |     }
  44 |
  45 |     return (
  46 |         <div className="matching-demo">
- 47 |             {/* ... Karte, Buttons ... */}
- 48 |         </div>
- 49 |     )
- 50 | }
+       ...   (weiter mit dem Auszug unten)
+```
 
-Z. 1 Importiert den Hook useState aus React.
+### Zeile für Zeile
 
-Z. 4–8 Die Datenquelle. Hier stehen die 5 Jobangebote als Array von Objekten. Diese Daten sind fest im Code (hardcoded) und ändern sich nie.
+- **Z. 1** Importiert den Hook `useState` aus React.
+- **Z. 4–8** Die Datenquelle. Hier stehen die 5 Jobangebote als Array von Objekten. Diese Daten sind fest im Code (hardcoded) und ändern sich nie.
+- **Z. 11** Der erste State: `currentIndex` (welches Angebot ist gerade dran?). Er startet bei `0` (das erste Angebot).
+- **Z. 12** Der zweite State: `matches` (eine Liste der gelikten Jobs). Er startet als leeres Array `[]`.
+- **Z. 13** Der dritte State: `noMatches` (eine Liste der abgelehnten Jobs). Er startet ebenfalls leer.
+- **Z. 14** Der vierte State: `finished` (ist die Demo vorbei?). Er startet mit `false`.
+- **Z. 16** Eine normale Variable (kein State!): `current` holt sich das aktuelle Jobangebot aus dem Array an der Position `currentIndex`. Wenn `currentIndex` z. B. `2` ist, holt es sich das dritte Angebot.
+- **Z. 18** Die Funktion `handleSwipe`. Sie nimmt einen Parameter `direction` entgegen (entweder `'left'` oder `'right'`). Diese Funktion wird aufgerufen, wenn der Nutzer auf einen der Buttons klickt.
+- **Z. 19** Sicherheitscheck: Wenn es kein aktuelles Angebot gibt, brich die Funktion ab (`return`). Im normalen Ablauf tritt das nicht auf: Beim letzten Angebot wird `currentIndex` nicht mehr erhöht, sondern `finished` auf `true` gesetzt (siehe Z. 29–31). Der Check schützt nur davor, dass ein ungültiger Index zu Fehlern führt.
+- **Z. 21–22** Wenn die Richtung `'right'` ist (also „Interessiert“), wird der `matches`-State aktualisiert. Wir erstellen ein neues Array mit dem Spread-Operator (`...matches`). Das kopiert alle bisherigen Matches und fügt das aktuelle Angebot (`current`) am Ende hinzu. **Wichtig:** Wir dürfen das alte Array nicht direkt verändern (z. B. mit `matches.push()`), weil React sonst nicht merkt, dass sich etwas geändert hat.
+- **Z. 23–25** Das Gleiche für die linke Seite: Wenn die Richtung `'left'` ist, füge das Angebot zu `noMatches` hinzu.
+- **Z. 27** Prüfe, ob es noch weitere Angebote gibt (`currentIndex + 1 < 5`). Wenn ja:
+- **Z. 28** Erhöhe den Index um 1 (`setCurrentIndex(currentIndex + 1)`). React zeichnet die Komponente neu und zeigt das nächste Jobangebot an.
+- **Z. 29–31** Wenn es keine weiteren Angebote gibt (wir sind beim letzten angekommen):
+- **Z. 30** Setze `finished` auf `true`. Dadurch wird beim nächsten Rendern die Ergebnisansicht angezeigt (siehe Z. 41).
+- **Z. 34–39** Die Funktion `resetDemo`. Sie setzt alle States auf ihre Anfangswerte zurück (Index 0, leere Listen, `finished` auf `false`). Das wird aufgerufen, wenn der Nutzer auf „Demo neu starten“ klickt.
+- **Z. 41** Das bedingte Rendern: `if (finished)`. Wenn die Demo vorbei ist, gibt die Komponente eine andere Oberfläche zurück (die Ergebnisansicht mit den Listen der gematchten und abgelehnten Jobs).
+- **Z. 45** Wenn `finished` den Wert `false` hat, wird das normale Spielfeld zurückgegeben (die Karte mit dem Job, die Buttons, der Fortschritt).
 
-Z. 11 Der erste State: currentIndex (welches Angebot ist gerade dran?). Er startet bei 0 (das erste Angebot).
+---
 
-Z. 12 Der zweite State: matches (eine Liste der gelikten Jobs). Er startet als leeres Array [].
+## Die Karte und die Buttons im JSX (Auszug)
 
-Z. 13 Der dritte State: noMatches (eine Liste der abgelehnten Jobs). Er startet ebenfalls leer.
-
-Z. 14 Der vierte State: finished (ist die Demo vorbei?). Er startet mit false.
-
-Z. 16 Eine normale Variable (kein State!): current holt sich das aktuelle Jobangebot aus dem Array an der Position currentIndex. Wenn currentIndex z.B. 2 ist, holt es sich das dritte Angebot.
-
-Z. 18 Die Funktion handleSwipe. Sie nimmt einen Parameter direction entgegen (entweder 'left' oder 'right'). Diese Funktion wird aufgerufen, wenn der Nutzer auf einen der Buttons klickt.
-
-Z. 19 Sicherheitscheck: Wenn es kein aktuelles Angebot gibt (weil wir schon am Ende sind), brich die Funktion ab (return). Das verhindert Fehler.
-
-Z. 21 Wenn die Richtung 'right' ist (also „Interessiert"):
-
-Z. 22 Aktualisiere den matches-State. Wir erstellen ein neues Array mit dem Spread-Operator (...matches). Das kopiert alle bisherigen Matches und fügt das aktuelle Angebot (current) am Ende hinzu. Wichtig: Wir dürfen das alte Array nicht direkt verändern (z.B. matches.push()), weil React sonst nicht merkt, dass sich etwas geändert hat.
-
-Z. 23–25 Das Gleiche für die linke Seite: Wenn die Richtung 'left' ist, füge das Angebot zu noMatches hinzu.
-
-Z. 27 Prüfe, ob es noch weitere Angebote gibt (currentIndex + 1 < 5). Wenn ja:
-
-Z. 28 Erhöhe den Index um 1 (setCurrentIndex(currentIndex + 1)). React zeichnet die Komponente neu und zeigt das nächste Jobangebot an.
-
-Z. 29–31 Wenn es keine weiteren Angebote gibt (wir sind beim letzten angekommen):
-
-Z. 30 Setze finished auf true. Dadurch wird beim nächsten Rendern die Ergebnisansicht angezeigt (siehe Z. 41).
-
-Z. 34–39 Die Funktion resetDemo. Sie setzt alle States auf ihre Anfangswerte zurück (Index 0, leere Listen, finished auf false). Das wird aufgerufen, wenn der Nutzer auf „Demo neu starten" klickt.
-
-Z. 41 Das bedingte Rendern: if (finished). Wenn die Demo vorbei ist, gibt die Komponente eine andere Oberfläche zurück (die Ergebnisansicht mit den Listen der gematchten und abgelehnten Jobs).
-
-Z. 45 Wenn finished false ist, wird das normale Spielfeld zurückgegeben (die Karte mit dem Job, die Buttons, der Fortschritt).
-
-
-Die Buttons im JSX (Ausschnitt)
+Die Zeilennummern in diesem Auszug stammen aus der Originaldatei.
 
 ```jsx
  48 |             <div className="card-stack">
@@ -133,32 +118,52 @@ Die Buttons im JSX (Ausschnitt)
  60 |                 <button className="swipe-left" onClick={() => handleSwipe('left')}>👈 Nicht interessiert</button>
  61 |                 <button className="swipe-right" onClick={() => handleSwipe('right')}>👉 Interessiert</button>
  62 |             </div>
+```
 
+- **Z. 51–52** Geschweifte Klammern wie `{current.company}` fügen dynamische Daten in das JSX ein. React ersetzt sie durch den tatsächlichen Wert (z. B. „FoodCorp Europe“).
+- **Z. 54–55** Genauso für Titel und Beschreibung.
+- **Z. 60–61** Das `onClick`-Attribut ist der Event-Handler. Wenn der Nutzer klickt, wird die Pfeilfunktion `() => handleSwipe('left')` ausgeführt. Das ist eine anonyme Funktion, die `handleSwipe` mit dem Parameter `'left'` aufruft. (Man könnte auch `onClick={handleSwipe}` schreiben, aber dann wüsste die Funktion nicht, welche Richtung gemeint ist.)
 
- Z. 51–52 Geschweifte Klammern {current.company} fügen dynamische Daten in das JSX ein. React ersetzt sie durch den tatsächlichen Wert (z.B. „FoodCorp Europe").
+---
 
-Z. 54–55 Genauso für Titel und Beschreibung.
+## Listen rendern mit `.map` und `key` (Beispiel)
 
-Z. 60–61 Das onClick-Attribut ist der Event-Handler. Wenn der Nutzer klickt, wird die Pfeilfunktion () => handleSwipe('left') ausgeführt. Das ist eine anonyme Funktion, die handleSwipe mit dem Parameter 'left' aufruft. (Man könnte auch onClick={handleSwipe} schreiben, aber dann wüsste die Funktion nicht, welche Richtung gemeint ist.)
+Kapitel 0 nennt `key` bei `.map`. Das Prinzip sieht in der Ergebnisansicht so aus. **Dieses Beispiel ist vereinfacht und dient der Veranschaulichung, es steht so nicht 1:1 im Projekt.**
 
+```jsx
+<ul>
+    {matches.map((job) => (
+        <li key={job.id}>{job.company} – {job.title}</li>
+    ))}
+</ul>
+```
 
-Typische Fragen
+- `matches.map(...)` wandelt jedes Element des Arrays in ein JSX-Element um.
+- `key={job.id}` gibt jedem Listeneintrag eine feste Identität. So erkennt React, welcher Eintrag sich geändert hat, und muss nicht die ganze Liste neu aufbauen. Der Wert muss innerhalb der Liste eindeutig sein (hier die `id`).
 
-    Was ist ein „State" und warum brauchen wir ihn? Ein State ist das Gedächtnis einer Komponente. Ohne ihn würde React bei jedem Neuzeichnen vergessen, welches Angebot gerade dran ist oder welche Jobs schon geliked wurden. Mit useState bleiben diese Werte erhalten.
+---
 
-    Warum dürfen wir matches.push() nicht verwenden? Weil React Änderungen an Objekten und Arrays nur erkennt, wenn die Referenz auf das Objekt geändert wird. push() verändert das Array an Ort und Stelle, aber die Referenz bleibt gleich. React würde denken: „Alles beim Alten" und die Oberfläche nicht aktualisieren. Deshalb erstellen wir mit [...matches, current] ein neues Array.
+## Typische Fragen
 
-    Was ist der Spread-Operator ...? Er kopiert alle Elemente aus einem Array oder alle Eigenschaften aus einem Objekt in ein neues Array bzw. Objekt. [...matches] erstellt eine flache Kopie des matches-Arrays.
+**Was ist ein „State“ und warum brauchen wir ihn?**
+Ein State ist das Gedächtnis einer Komponente. Ohne ihn würde React bei jedem Neuzeichnen vergessen, welches Angebot gerade dran ist oder welche Jobs schon geliked wurden. Mit `useState` bleiben diese Werte erhalten.
 
-    Was passiert, wenn wir if (!current) return weglassen? Wenn die Demo vorbei ist, ist current undefined (weil currentIndex außerhalb des Arrays liegt). Ein Zugriff auf current.company würde dann einen Fehler werfen („Cannot read properties of undefined"). Der Check verhindert das.
+**Warum dürfen wir `matches.push()` nicht verwenden?**
+Weil React Änderungen an Objekten und Arrays nur erkennt, wenn die Referenz auf das Objekt geändert wird. `push()` verändert das Array an Ort und Stelle, aber die Referenz bleibt gleich. React würde denken: „Alles beim Alten“ und die Oberfläche nicht aktualisieren. Deshalb erstellen wir mit `[...matches, current]` ein neues Array.
 
-    Warum rufen wir setMatches, setNoMatches, setCurrentIndex und setFinished alle in einer Funktion auf? React fasst alle State-Updates, die innerhalb desselben Event-Handlers passieren, zu einem einzigen Neuzeichnen zusammen. Das ist eine Optimierung. Es wäre ineffizient, wenn React nach jedem set... die Seite neu zeichnen würde.
+**Was ist der Spread-Operator `...`?**
+Er kopiert alle Elemente aus einem Array oder alle Eigenschaften aus einem Objekt in ein neues Array bzw. Objekt. `[...matches]` erstellt eine flache Kopie des `matches`-Arrays.
 
+**Wozu dient `if (!current) return` in Z. 19?**
+Es ist eine Absicherung: Gäbe es kein aktuelles Angebot (z. B. weil der Index durch einen Fehler außerhalb des Arrays liegt), würde `handleSwipe` sonst mit `undefined` weiterarbeiten und beim Speichern oder Auslesen Fehler verursachen. Im normalen Ablauf ist `current` immer gültig, weil der Index beim letzten Angebot nicht mehr erhöht wird.
 
-Mach es selbst
+**Warum rufen wir `setMatches`, `setNoMatches`, `setCurrentIndex` und `setFinished` alle in einer Funktion auf?**
+React fasst alle State-Updates, die innerhalb desselben Event-Handlers passieren, zu einem einzigen Neuzeichnen zusammen (sogenanntes „Batching“). Das ist eine Optimierung. Es wäre ineffizient, wenn React nach jedem `set...` die Seite neu zeichnen würde.
 
-    Füge ein sechstes Jobangebot zu jobOffers hinzu (z.B. mit id: 6). Was passiert mit dem Zähler „1 von 5"? (Er sollte automatisch „1 von 6" anzeigen, weil wir jobOffers.length verwenden.)
+---
 
-    Ändere if (currentIndex + 1 < jobOffers.length) in if (currentIndex + 1 <= jobOffers.length). Was passiert beim letzten Angebot? (Du bekommst einen Fehler, weil current dann undefined ist – genau deshalb ist der Sicherheitscheck in Z. 19 wichtig!)
+## Mach es selbst
 
-    Füge in der resetDemo-Funktion ein setFinished(false) hinzu, falls es noch nicht da ist (es ist da). Warum ist das wichtig? (Ohne diesen Aufruf würde die Demo nach dem Zurücksetzen sofort wieder die Ergebnisansicht anzeigen, weil finished noch true wäre.)
+1. Füge ein sechstes Jobangebot zu `jobOffers` hinzu (z. B. mit `id: 6`). Was passiert mit dem Zähler „1 von 5“? (Er sollte automatisch „1 von 6“ anzeigen, weil wir `jobOffers.length` verwenden.)
+2. Ändere `if (currentIndex + 1 < jobOffers.length)` in `if (currentIndex + 1 <= jobOffers.length)`. Was passiert beim letzten Angebot? (Der Index springt auf 5, `current` ist `undefined`, und beim Zeichnen von `current.company` gibt es einen Fehler. Der Check in Z. 19 hilft hier nicht, weil der Fehler beim Rendern auftritt und nicht in `handleSwipe`.)
+3. Entferne in `resetDemo` die Zeile `setFinished(false)`. Spiele die Demo bis zum Ende durch und klicke auf „Demo neu starten“. Was passiert? (Die Ergebnisansicht bleibt stehen, weil `finished` weiterhin `true` ist. Genau deshalb muss `resetDemo` auch `finished` zurücksetzen.)
