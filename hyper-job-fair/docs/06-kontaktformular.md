@@ -14,11 +14,13 @@ In normalem HTML hat ein `<input>`-Feld seinen Wert selbst. Man kann ihn mit `do
 - Wenn der Nutzer tippt, wird der State aktualisiert (`onChange={handleChange}`).
 - React zeichnet das Feld mit dem neuen Wert neu.
 
-Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die einzige „Wahrheit". Wir können den Wert jederzeit programmatisch ändern (z.B. beim Zurücksetzen des Formulars).
+Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die einzige „Wahrheit". Wir können den Wert jederzeit programmatisch ändern (z. B. beim Zurücksetzen des Formulars).
 
 ---
 
 ## Datei: `src/pages/Contact.jsx`
+
+> **Hinweis:** Im Listing sind die Info-Karten durch einen Kommentar ersetzt (gekürzt).
 
 ```jsx
   1 | import { useState } from 'react'
@@ -76,98 +78,80 @@ Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die
  53 | }
  54 |
  55 | export default Contact
+```
 
+### Zeile für Zeile
 
-Z. 1 Importiert useState.
+- **Z. 1** Importiert `useState`.
+- **Z. 5** Der State `form`. Er ist ein Objekt mit drei Feldern (`name`, `email`, `message`), die alle als leerer String starten. Dieses eine Objekt verwaltet also alle drei Eingabefelder gleichzeitig.
+- **Z. 6** Der State `sent`. Er merkt sich, ob das Formular erfolgreich abgeschickt wurde (um die Erfolgsmeldung anzuzeigen).
+- **Z. 8–10** Die Funktion `handleChange`. Sie wird bei jeder Eingabe in jedem Feld aufgerufen.
+- **Z. 9** Das ist die wichtigste Zeile in diesem Kapitel: `setForm({ ...form, [e.target.name]: e.target.value })`.
+  - `...form`: kopiert alle bisherigen Werte aus dem State (also auch die anderen beiden Felder, die der Nutzer gerade nicht ändert).
+  - `[e.target.name]`: der Name des Feldes, das gerade geändert wurde (z. B. `"name"`, `"email"` oder `"message"`). Das ist ein berechneter Eigenschaftsname (*computed property name*). Wenn der Nutzer z. B. in das Namensfeld tippt, wird daraus `name:`.
+  - `e.target.value`: der neue Wert, den der Nutzer gerade eingegeben hat.
+  - Ergebnis: ein neues Form-Objekt, bei dem nur das geänderte Feld aktualisiert wurde, die anderen bleiben gleich.
+- **Z. 12–16** Die Funktion `handleSubmit`. Sie wird aufgerufen, wenn das Formular abgeschickt wird.
+- **Z. 13** `e.preventDefault()`: Das ist entscheidend! Normalerweise würde ein HTML-Formular beim Absenden die Seite neu laden (und die Daten an eine URL schicken). Da wir aber eine Single Page Application (SPA) sind, wollen wir das nicht. `preventDefault()` verhindert das Standardverhalten des Browsers.
+- **Z. 14** Setzt `sent` auf `true`. Dadurch wird sofort die Erfolgsmeldung angezeigt (siehe Z. 31).
+- **Z. 15** `setTimeout`: Nach 4000 Millisekunden (4 Sekunden) wird `sent` wieder auf `false` gesetzt. Das Formular wird erneut angezeigt.
+- **Z. 31** Bedingtes Rendern: `sent ? ( ... ) : ( ... )`. Wenn `sent` den Wert `true` hat, wird die Erfolgsmeldung angezeigt. Andernfalls (`:`) wird das Formular angezeigt.
+- **Z. 36** `<form onSubmit={handleSubmit}>`: Das `onSubmit`-Event wird ausgelöst, wenn das Formular abgeschickt wird (durch Klick auf den Button oder durch Drücken der Enter-Taste).
+- **Z. 37** `<label htmlFor="name">`: Das Attribut `htmlFor` ist die React-Version von `for`. Es verknüpft das Label mit dem Eingabefeld, das die `id="name"` hat. Dadurch kann der Nutzer auf das Label klicken, um das Feld zu fokussieren. Das ist wichtig für die Barrierefreiheit.
+- **Z. 38** Das Eingabefeld für den Namen:
+  - `type="text"`: ein normales Textfeld.
+  - `id="name"`: die ID (für das Label).
+  - `name="name"`: der Name (wichtig für `e.target.name` in `handleChange`).
+  - `value={form.name}`: der Wert kommt aus dem State.
+  - `onChange={handleChange}`: bei jeder Eingabe wird der State aktualisiert.
+  - `required`: HTML5-Validierung (der Nutzer kann das Feld nicht leer lassen).
+- **Z. 41** Das E-Mail-Feld. `type="email"` sorgt dafür, dass der Browser die Eingabe auf ein gültiges E-Mail-Format prüft.
+- **Z. 44** Das Textfeld für die Nachricht. In HTML steht der Inhalt eines `<textarea>` zwischen den Tags. In React wird er dagegen, genau wie bei `<input>`, über `value` und `onChange` gesteuert.
+- **Z. 46** Der Absende-Button. `type="submit"` ist wichtig, damit er das `onSubmit`-Event des Formulars auslöst.
 
-Z. 5 Der State form. Er ist ein Objekt mit drei Feldern (name, email, message), die alle als leerer String starten. Dieses eine Objekt verwaltet also alle drei Eingabefelder gleichzeitig.
+> **Hinweis:** Nach dem Absenden bleiben die eingegebenen Werte im State `form` erhalten. Wenn das Formular nach 4 Sekunden wieder erscheint, sind die Felder noch gefüllt. Für ein echtes Zurücksetzen könnte man in `handleSubmit` zusätzlich `setForm({ name: '', email: '', message: '' })` aufrufen (siehe Aufgabe 5).
 
-Z. 6 Der State sent. Er merkt sich, ob das Formular erfolgreich abgeschickt wurde (um die Erfolgsmeldung anzuzeigen).
+---
 
-Z. 8–10 Die Funktion handleChange. Sie wird bei jeder Eingabe in jedem Feld aufgerufen.
-
-Z. 9 Das ist die wichtigste Zeile in diesem Kapitel: setForm({ ...form, [e.target.name]: e.target.value }).
-
-    ...form: Kopiert alle bisherigen Werte aus dem State (also die anderen beiden Felder, die der Nutzer noch nicht geändert hat).
-
-    [e.target.name]: Der Name des Feldes, das gerade geändert wurde (z.B. "name", "email" oder "message"). Das ist ein berechneter Eigenschaftsname (computed property name). Wenn der Nutzer z.B. in das Namensfeld tippt, wird daraus name:.
-
-    e.target.value: Der neue Wert, den der Nutzer gerade eingegeben hat.
-
-    Ergebnis: Ein neues Form-Objekt, bei dem nur das geänderte Feld aktualisiert wurde, die anderen bleiben gleich.
-
-Z. 12–16 Die Funktion handleSubmit. Sie wird aufgerufen, wenn der Nutzer auf „Absenden" klickt.
-
-Z. 13 e.preventDefault(): Das ist entscheidend! Normalerweise würde ein HTML-Formular beim Absenden die Seite neu laden (und an eine URL schicken). Da wir aber eine Single Page Application (SPA) sind, wollen wir das nicht. preventDefault() verhindert das Standardverhalten des Browsers.
-
-Z. 14 Setzt sent auf true. Dadurch wird sofort die Erfolgsmeldung angezeigt (siehe Z. 31).
-
-Z. 15 setTimeout: Nach 4000 Millisekunden (4 Sekunden) wird sent wieder auf false gesetzt. Das Formular wird erneut angezeigt.
-
-Z. 31 Bedingtes Rendern: sent ? ( ... ) : ( ... ). Wenn sent true ist, wird die Erfolgsmeldung angezeigt. Andernfalls (:) wird das Formular angezeigt.
-
-Z. 36 <form onSubmit={handleSubmit}>: Das onSubmit-Event wird ausgelöst, wenn das Formular abgeschickt wird (durch Klick auf den Button oder durch Drücken der Enter-Taste).
-
-Z. 37 <label htmlFor="name">: Das htmlFor-Attribut ist die React-Version von for. Es verknüpft das Label mit dem Eingabefeld, das die id="name" hat. Dadurch kann der Nutzer auf das Label klicken, um das Feld zu fokussieren. Das ist wichtig für Barrierefreiheit.
-
-Z. 38 Das Eingabefeld für den Namen:
-
-    type="text": Ein normales Textfeld.
-
-    id="name": Die ID (für das Label).
-
-    name="name": Der Name (wichtig für e.target.name in handleChange).
-
-    value={form.name}: Der Wert kommt aus dem State.
-
-    onChange={handleChange}: Bei jeder Eingabe wird der State aktualisiert.
-
-    required: HTML5-Validierung (der Nutzer kann das Feld nicht leer lassen).
-
-Z. 41 Das E-Mail-Feld. type="email" sorgt dafür, dass der Browser die Eingabe auf ein gültiges E-Mail-Format prüft.
-
-Z. 44 Das Textfeld für die Nachricht. <textarea> hat in React kein value-Attribut im HTML-Sinne, sondern wird ebenfalls über value und onChange gesteuert.
-
-Z. 46 Der Absende-Button. type="submit" ist wichtig, damit er das onSubmit-Event des Formulars auslöst.
-
-
-Warum ist das „kontrolliert"?
+## Warum ist das „kontrolliert"?
 
 Das Formular heißt „kontrolliert", weil React die volle Kontrolle über den Wert hat. Der Browser speichert den Wert nicht selbst, sondern fragt bei jedem Tastendruck React: „Was soll ich anzeigen?" Und React antwortet mit dem Wert aus dem State.
 
 Der Datenfluss sieht so aus:
 
-    Nutzer tippt ein „M".
+1. Der Nutzer tippt ein „M“.
+2. Der Browser löst `onChange` aus.
+3. `handleChange` wird aufgerufen und aktualisiert den State (`setForm`).
+4. React zeichnet die Komponente neu.
+5. Das Eingabefeld zeigt jetzt den neuen Wert aus dem State an.
 
-    Browser löst onChange aus.
+Das macht den Code vorhersehbar und testbar.
 
-    handleChange wird aufgerufen und aktualisiert den State (setForm).
+---
 
-    React zeichnet die Komponente neu.
+## Typische Fragen
 
-    Das Eingabefeld zeigt jetzt den neuen Wert aus dem State an.
+**Warum verwenden wir nicht einfach `useRef` für die Formularfelder?**
+Mit `useRef` (unkontrollierte Komponenten) würde der Browser den Wert selbst verwalten, und wir würden ihn erst beim Absenden auslesen. Das ist manchmal einfacher, aber es macht es schwieriger, den Wert während der Eingabe zu validieren oder zu ändern. Für ein einfaches Formular ist beides okay, aber „kontrolliert“ ist der React-Standard und zeigt, dass man das Konzept verstanden hat.
 
-Es macht den Code vorhersehbar und testbar.
+**Was ist `e.target`?**
+`e` ist das Event-Objekt. `e.target` ist das Element, das das Event ausgelöst hat (also das Eingabefeld). `e.target.name` und `e.target.value` sind Eigenschaften dieses Elements.
 
+**Was ist ein „berechneter Eigenschaftsname“ (`[e.target.name]`)?**
+Wenn man in einem Objekt einen Schlüssel dynamisch setzen möchte, verwendet man eckige Klammern. `{ [key]: value }` erstellt ein Objekt mit dem Schlüssel, der in der Variablen `key` steht. In unserem Fall ist der Schlüssel der Name des Feldes (`"name"`, `"email"` oder `"message"`).
 
-Typische Fragen
+**Warum wird `setTimeout` verwendet und nicht eine Animation?**
+`setTimeout` ist eine einfache Möglichkeit, eine Aktion nach einer bestimmten Zeit auszuführen. In einer echten Anwendung würde man hier wahrscheinlich eine API-Anfrage schicken und dann die Antwort abwarten. Für die Demo simulieren wir das mit `setTimeout`.
 
-    Warum verwenden wir nicht einfach useRef für die Formularfelder? Mit useRef (uncontrolled components) würde der Browser den Wert selbst verwalten und wir würden ihn erst beim Absenden auslesen. Das ist manchmal einfacher, aber es macht es schwieriger, den Wert während der Eingabe zu validieren oder zu ändern. Für ein einfaches Formular ist beides okay, aber „kontrolliert" ist der React-Standard und zeigt, dass man das Konzept verstanden hat.
+**Warum wird das Formular komplett ausgeblendet (`sent ? ... : ...`) und nicht nur die Erfolgsmeldung eingeblendet?**
+Das ist eine Design-Entscheidung. Wenn die Erfolgsmeldung erscheint, ist das Formular nicht mehr nötig (der Nutzer hat es ja abgeschickt). Durch das bedingte Rendern wird das Formular aus dem DOM entfernt, was die Seite aufgeräumter macht.
 
-    Was ist e.target? e ist das Event-Objekt. e.target ist das Element, das das Event ausgelöst hat (also das Eingabefeld). e.target.name und e.target.value sind die Eigenschaften dieses Elements.
+---
 
-    Was ist ein „berechneter Eigenschaftsname" ([e.target.name])? Wenn man in einem Objekt einen Schlüssel dynamisch setzen möchte, verwendet man eckige Klammern. { [key]: value } erstellt ein Objekt mit dem Schlüssel, der in der Variablen key steht. In unserem Fall ist der Schlüssel der Name des Feldes ("name", "email" oder "message").
+## Mach es selbst
 
-    Warum wird setTimeout verwendet und nicht eine Animation? setTimeout ist eine einfache Möglichkeit, eine Aktion nach einer bestimmten Zeit auszuführen. In einer echten Anwendung würde man hier wahrscheinlich eine API-Anfrage schicken und dann die Antwort abwarten. Für die Demo simulieren wir das mit setTimeout.
-
-    Warum wird das Formular komplett ausgeblendet (sent ? ... : ...) und nicht nur die Erfolgsmeldung eingeblendet? Das ist eine Design-Entscheidung. Wenn die Erfolgsmeldung erscheint, ist das Formular nicht mehr nötig (der Nutzer hat es ja abgeschickt). Durch das bedingte Rendern wird das Formular aus dem DOM entfernt, was die Seite aufgeräumter macht.
-
-Mach es selbst
-
-    Füge ein viertes Eingabefeld hinzu (z.B. „Betreff"). Vergiss nicht, es zum useState-Objekt hinzuzufügen (subject: '') und ins Formular einzubauen (name="subject").
-
-    Ändere die Zeit in setTimeout von 4000 auf 10000 (10 Sekunden). Was passiert?
-
-    Entferne testweise e.preventDefault() aus handleSubmit. Was passiert beim Absenden? (Die Seite lädt neu – du siehst kurz ein Flackern, und der State wird zurückgesetzt.)
-
-    Überlege: Was passiert, wenn du value={form.name} entfernst, aber onChange behältst? (Das Feld würde zwar den State aktualisieren, aber der angezeigte Wert würde sich nicht ändern – das Feld wäre „read-only" für den Nutzer, aber der State würde sich ändern. Das ist ein häufiger Fehler und zeigt, warum value und onChange immer zusammen gehören.)
+1. Füge ein viertes Eingabefeld hinzu (z. B. „Betreff“). Vergiss nicht, es zum `useState`-Objekt hinzuzufügen (`subject: ''`) und ins Formular einzubauen (`name="subject"`).
+2. Ändere die Zeit in `setTimeout` von `4000` auf `10000` (10 Sekunden). Was passiert?
+3. Entferne testweise `e.preventDefault()` aus `handleSubmit`. Was passiert beim Absenden? (Die Seite lädt neu: Du siehst kurz ein Flackern, und der State wird zurückgesetzt.)
+4. Überlege: Was passiert, wenn du `value={form.name}` entfernst, aber `onChange` behältst? (Das Feld wird zu einem *unkontrollierten* Feld: Der Nutzer kann ganz normal tippen, und `handleChange` aktualisiert den State trotzdem. Das Feld wird aber nicht mehr vom State gesteuert, etwa beim Zurücksetzen. Umgekehrt, also `value` ohne `onChange`, wäre das Feld für den Nutzer schreibgeschützt, und React würde eine Warnung ausgeben. Deshalb gehören `value` und `onChange` bei kontrollierten Feldern immer zusammen.)
+5. Ergänze in `handleSubmit` die Zeile `setForm({ name: '', email: '', message: '' })`. Was siehst du, wenn das Formular nach der Erfolgsmeldung wieder erscheint? (Die Felder sind jetzt leer, weil der State die einzige „Wahrheit“ ist.) 
