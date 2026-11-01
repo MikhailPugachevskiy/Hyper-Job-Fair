@@ -1,6 +1,6 @@
 # 0. Grundlagen: React, Vite und der Aufbau der App
 
-Diese Datei erklärt zuerst die Bausteine, die im gesamten Projekt vorkommen. Danach wird die Einstiegsdatei `main.jsx` Zeile für Zeile erklärt. Die weiteren Dateien folgen in den nächsten Kapiteln.
+Diese Datei erklärt zuerst die Bausteine, die im gesamten Projekt vorkommen. Danach werden die Einstiegsdateien `index.html` und `main.jsx` Zeile für Zeile erklärt. Die weiteren Dateien folgen in den nächsten Kapiteln.
 
 ---
 
@@ -22,7 +22,7 @@ Drei Ideen genügen, um den ganzen Code zu verstehen:
 | `onclick` | `onClick` | Attribute werden in camelCase geschrieben |
 | `style="color: red"` | `style={{ color: "red" }}` | `style` ist ein Objekt, kein Text |
 | `<br>`, `<img>` ohne Ende | `<br />`, `<img />` | jedes Element muss geschlossen werden |
-| ein Text mit Wert | `{wert}` | in geschweiften Klammern steht ein JavaScript-Ausdruck |
+| fester Text im Element | `{wert}` | in geschweiften Klammern steht ein JavaScript-Ausdruck |
 
 Ein Ausdruck in `{ }` kann eine Variable, ein Funktionsaufruf, ein Ternary (`a ? b : c`) oder `&&` sein. Eine Anweisung wie `if` oder `for` geht dort nicht.
 
@@ -32,7 +32,7 @@ Eine Komponente darf nur **ein** Wurzelelement zurückgeben. Wenn man mehrere Ge
 
 | Werkzeug | Wofür | Wo in der App |
 | --- | --- | --- |
-| **Props** | Daten und Funktionen von oben nach unten | `Header`, `Footer` (keine Props), Seiten |
+| **Props** | Daten und Funktionen von oben nach unten | im Projekt selbst nicht genutzt, das Konzept wird in Kapitel 2 erklärt |
 | **`useState`** | merkt sich einen Wert zwischen den Zeichnungen | `MatchingDemo.jsx`, `CustomerJourney.jsx`, `Contact.jsx` |
 | **`useEffect`** | führt etwas „außerhalb des Zeichnens" aus | `ScrollToTop.jsx` (scrollt nach oben) |
 | **`key`** | gibt Listenelementen eine feste Identität | `MatchingDemo.jsx` (bei `.map`) |
@@ -43,8 +43,7 @@ Eine Komponente darf nur **ein** Wurzelelement zurückgeben. Wenn man mehrere Ge
 
 Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt nur eine einzige HTML-Datei (`index.html`). Wenn der Nutzer auf „About" klickt, wird die Seite **nicht** neu geladen. Stattdessen tauscht React im Hintergrund nur die Komponente aus, die im `<main>`-Bereich angezeigt wird.
 
-
-**Das wichtigste Prinzip:** Der Zustand (z.B. „welcher Tab ist offen?" oder „welche Jobs habe ich geliked?") liegt immer in der Komponente, die ihn braucht. Er wird nicht global gespeichert, sondern lokal in der jeweiligen Page. Wenn der Nutzer die Seite wechselt, wird der State zurückgesetzt – das ist bei einer Demo völlig ausreichend.
+**Das wichtigste Prinzip:** Der Zustand (z. B. „welcher Tab ist offen?" oder „welche Jobs habe ich geliked?") liegt immer in der Komponente, die ihn braucht. Er wird nicht global gespeichert, sondern lokal in der jeweiligen Seite. Wenn der Nutzer die Seite wechselt, wird der State zurückgesetzt. Das ist bei einer Demo völlig ausreichend.
 
 ---
 
@@ -64,24 +63,21 @@ Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt
  11 |     <script type="module" src="/src/main.jsx"></script>
  12 |   </body>
  13 | </html>
+```
 
-Z. 1 Sagt dem Browser, dass es sich um eine HTML5-Datei handelt.
+### Zeile für Zeile
 
-Z. 2 Das lang="de"-Attribut teilt Screenreadern und Suchmaschinen mit, dass die Seite auf Deutsch ist (wichtig für Barrierefreiheit und SEO).
+- **Z. 1** Sagt dem Browser, dass es sich um eine HTML5-Datei handelt.
+- **Z. 2** Das Attribut `lang="de"` teilt Screenreadern und Suchmaschinen mit, dass die Seite auf Deutsch ist (wichtig für Barrierefreiheit und SEO).
+- **Z. 3–8** Der `<head>`-Bereich enthält Metadaten, die nicht direkt auf der Seite sichtbar sind.
+- **Z. 4** Stellt sicher, dass Umlaute (ä, ö, ü) und Sonderzeichen (€) korrekt dargestellt werden (UTF-8).
+- **Z. 5** Sorgt dafür, dass die Seite auf mobilen Geräten (Smartphones, Tablets) richtig skaliert wird, anstatt verkleinert dargestellt zu werden.
+- **Z. 6** Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen.
+- **Z. 7** Der Text, der im Browser-Tab angezeigt wird.
+- **Z. 10** Das ist der wichtigste Teil! Hier ist ein leeres `<div>` mit der ID `root`. React sucht dieses Element und fügt die gesamte App dort ein. Wenn dieses `<div>` fehlt, bleibt die Seite leer.
+- **Z. 11** Lädt die Datei `main.jsx`. Das `type="module"` sagt dem Browser, dass er die Datei als JavaScript-Modul behandeln soll (wichtig für `import`/`export`). Der Pfad beginnt mit `/`, das heißt: relativ zum Projekt-Root.
 
-Z. 3–8 Der <head>-Bereich enthält Metadaten, die nicht direkt auf der Seite sichtbar sind.
-
-Z. 4 Stellt sicher, dass Umlaute (ä, ö, ü) und Sonderzeichen (€) korrekt dargestellt werden (UTF-8).
-
-Z. 5 Sorgt dafür, dass die Seite auf mobilen Geräten (Smartphones, Tablets) richtig skaliert wird, anstatt verkleinert dargestellt zu werden.
-
-Z. 6 Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen.
-
-Z. 7 Der Text, der im Browser-Tab angezeigt wird.
-
-Z. 10 Das ist der wichtigste Teil! Hier ist ein leerer <div> mit der ID root. React sucht dieses Element und fügt die gesamte App dort ein. Wenn dieser <div> fehlt, bleibt die Seite leer.
-
-Z. 11 Lädt die Datei main.jsx. Das type="module" sagt dem Browser, dass er die Datei als JavaScript-Modul behandeln soll (wichtig für import/export). Der Pfad beginnt mit /, was bedeutet: relativ zum Projekt-Root.
+---
 
 ## Datei: `src/main.jsx` (React-Start)
 
@@ -99,41 +95,41 @@ Z. 11 Lädt die Datei main.jsx. Das type="module" sagt dem Browser, dass er die 
  11 |     </BrowserRouter>
  12 |   </React.StrictMode>,
  13 | )
+```
 
-     Z. 1 Importiert das React-Paket. Seit React 17 ist dieser Import streng genommen nicht mehr nötig (der JSX-Compiler fügt ihn automatisch ein), aber er schadet nicht und ist in vielen Projekten noch üblich.
+### Zeile für Zeile
 
-    Z. 2 Importiert ReactDOM aus dem Paket react-dom/client. Das ist die moderne API (seit React 18), um eine React-App im Browser zu starten.
+- **Z. 1** Importiert das React-Paket. Seit React 17 ist dieser Import streng genommen nicht mehr nötig (der JSX-Compiler fügt ihn automatisch ein), aber er schadet nicht und ist in vielen Projekten noch üblich.
+- **Z. 2** Importiert `ReactDOM` aus dem Paket `react-dom/client`. Das ist die moderne API (seit React 18), um eine React-App im Browser zu starten.
+- **Z. 3** Importiert `BrowserRouter` aus dem Paket `react-router-dom`. Der Router sorgt dafür, dass die URL im Browser (z. B. `/about`) mit der richtigen Komponente verknüpft wird, ohne dass die Seite neu geladen wird.
+- **Z. 4** Importiert die Hauptkomponente `App` aus der Datei `App.jsx` im selben Ordner. Hier ist die Endung `.jsx` ausgeschrieben. Vite findet Dateien auch ohne Endung (wie bei den Imports in `App.jsx`), beides funktioniert.
+- **Z. 5** Importiert die globale CSS-Datei `App.css`. Durch diesen Import wird das Styling auf die gesamte App angewendet.
+- **Z. 7** Sucht das Element mit der ID `root` in der `index.html` und erstellt dort einen React-„Wurzelpunkt“. `.render(...)` zeichnet dann alles, was in den Klammern steht, in dieses Element.
+- **Z. 8** `<React.StrictMode>` ist ein Werkzeug für die Entwicklung. Es zeigt zusätzliche Warnungen in der Browser-Konsole an (z. B. wenn man veraltete React-Funktionen verwendet). Auf die spätere Produktionsversion hat es keinen Einfluss.
+- **Z. 9–11** `<BrowserRouter>` umschließt die gesamte App. Das bedeutet: Jede Komponente innerhalb dieses Bereichs kann den Router nutzen (z. B. `<Link>` oder `useLocation`).
+- **Z. 10** `<App />` ist die eigentliche Anwendung. Sie enthält die Navigation, die Seiten und den Footer.
+- **Z. 12–13** Das Komma am Ende ist syntaktisch korrekt (es gehört zur `render`-Funktion, die mehrere Argumente akzeptieren könnte). Es ist ein optionales „Trailing Comma“, das oft von Formatierungswerkzeugen automatisch gesetzt wird.
 
-    Z. 3 Importiert BrowserRouter aus dem Paket react-router-dom. Der Router sorgt dafür, dass die URL im Browser (z.B. /about) mit der richtigen Komponente verknüpft wird, ohne dass die Seite neu geladen wird.
+---
 
-    Z. 4 Importiert die Hauptkomponente App aus der Datei App.jsx im selben Ordner. Die Endung .jsx schreibt man beim Import normalerweise dazu, hier ist sie explizit angegeben.
+## Typische Fragen
 
-    Z. 5 Importiert die globale CSS-Datei App.css. Durch diesen Import wird das Styling auf die gesamte App angewendet.
+**Warum gibt es nur eine `index.html`?**
+Weil wir eine Single Page Application (SPA) bauen. React tauscht den Inhalt im `<div id="root">` aus, je nachdem, welche URL gerade aufgerufen wird. Der Browser lädt die HTML-Datei nur einmal.
 
-    Z. 7 Sucht das Element mit der ID root in der index.html und erstellt dort einen React-„Wurzelpunkt". .render(...) zeichnet dann alles, was in den Klammern steht, in dieses Element.
+**Was ist der Unterschied zwischen `main.jsx` und `App.jsx`?**
+`main.jsx` ist der Startpunkt: Die Datei verbindet React mit dem Browser (dem `<div id="root">`). `App.jsx` ist die eigentliche Anwendung: Sie definiert, welche Seiten es gibt und wie sie verlinkt sind.
 
-    Z. 8 <React.StrictMode> ist ein Werkzeug für die Entwicklung. Es zeigt zusätzliche Warnungen in der Browser-Konsole an (z.B. wenn man veraltete React-Funktionen verwendet). Auf die spätere Produktionsversion hat es keinen Einfluss.
+**Warum importieren wir `App.css` in `main.jsx` und nicht in `App.jsx`?**
+Das ist eine Design-Entscheidung, beide Wege funktionieren. Der Import in `main.jsx` macht deutlich: „Diese CSS-Datei gilt für die gesamte App.“ (Bei Komponenten-Styles ist es dagegen üblich, das CSS dort zu importieren, wo es gebraucht wird.)
 
-    Z. 9–11 <BrowserRouter> umschließt die gesamte App. Das bedeutet: Jede Komponente innerhalb dieses Bereichs kann den Router nutzen (z.B. <Link> oder useLocation).
+**Was ist `BrowserRouter` und warum brauchen wir ihn?**
+Ohne Router würde ein Klick auf „About“ die Seite neu laden und einen 404-Fehler produzieren, weil es keine echte Datei `about.html` gibt. Der Router fängt den Klick ab und tauscht nur die React-Komponente aus. Die URL ändert sich trotzdem, sodass man die Seite teilen oder als Lesezeichen speichern kann.
 
-    Z. 10 <App /> ist die eigentliche Anwendung. Sie enthält die Navigation, die Seiten und den Footer.
+---
 
-    Z. 13 Das Komma am Ende ist syntaktisch korrekt (es gehört zur render-Funktion, die mehrere Argumente akzeptieren könnte). Es ist ein optionales „trailing comma", das oft von Formatierungswerkzeugen automatisch gesetzt wird.
+## Mach es selbst
 
-Typische Fragen
-
-    Warum gibt es nur eine index.html? Weil wir eine Single Page Application (SPA) bauen. React tauscht den Inhalt im <div id="root"> aus, je nachdem, welche URL gerade aufgerufen wird. Der Browser lädt die HTML-Datei nur einmal.
-
-    Was ist der Unterschied zwischen main.jsx und App.jsx? main.jsx ist der Startpunkt: Es verbindet React mit dem Browser (dem <div id="root">). App.jsx ist die eigentliche Anwendung: Es definiert, welche Seiten es gibt und wie sie verlinkt sind.
-
-    Warum importieren wir App.css in main.jsx und nicht in App.jsx? Das ist eine Design-Entscheidung. Beide Wege funktionieren. Der Import in main.jsx macht deutlich: „Diese CSS-Datei gilt für die gesamte App." (In React ist es üblich, CSS dort zu importieren, wo es gebraucht wird.)
-
-    Was ist BrowserRouter und warum brauchen wir ihn? Ohne Router würde ein Klick auf „About" die Seite neu laden und einen 404-Fehler produzieren, weil es keine echte Datei about.html gibt. Der Router fängt den Klick ab und tauscht nur die React-Komponente aus. Die URL ändert sich trotzdem, sodass man die Seite teilen oder als Lesezeichen speichern kann.
-
-Mach es selbst
-
-    Ändere den Text im <title>-Tag in index.html auf „Meine Jobmesse". Was siehst du im Browser-Tab?
-
-    Entferne testweise <BrowserRouter> aus main.jsx (und die Import-Zeile). Was passiert, wenn du auf „About" klickst? (Du wirst eine Fehlermeldung sehen – warum?)
-
-    Ändere React.StrictMode in <> (ein leeres Fragment). Was ändert sich im Browser? (Nichts – aber du hast gelernt, dass StrictMode nur ein Entwicklungswerkzeug ist.)
+1. Ändere den Text im `<title>`-Tag in `index.html` auf „Meine Jobmesse“. Was siehst du im Browser-Tab?
+2. Entferne testweise `<BrowserRouter>` aus `main.jsx` (und die Import-Zeile). Was passiert, wenn du auf „About“ klickst? (Du wirst eine Fehlermeldung sehen. Warum?)
+3. Ersetze `React.StrictMode` durch `<>` (ein leeres Fragment). Was ändert sich im Browser? (Nichts, aber du hast gelernt, dass `StrictMode` nur ein Entwicklungswerkzeug ist.)
