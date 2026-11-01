@@ -64,40 +64,30 @@ Da diese Seiten keine komplexe Logik (wie Zustände oder Berechnungen) enthalten
  53 | }
  54 |
  55 | export default Home
+```
 
+### Zeile für Zeile
 
- Z. 1 Importiert Link aus React Router. Im Gegensatz zu NavLink (aus dem Header) fügt Link keine aktive Klasse hinzu, sondern lädt einfach nur die Zielseite ohne Neuladen.
+- **Z. 1** Importiert `Link` aus React Router. Im Gegensatz zu `NavLink` (aus dem Header) fügt `Link` keine aktive Klasse hinzu, sondern navigiert einfach nur zur Zielseite, ohne dass die Seite neu geladen wird.
+- **Z. 2** Importiert die spezifischen Styles für die Startseite.
+- **Z. 6** `<div className="home">` ist der äußerste Wrapper. Er dient in `Home.css` als „Anker“ für spezifische Styles (z. B. `.home .hero`), damit diese nicht versehentlich auf andere Seiten wirken.
+- **Z. 7** Ein `<section>`-Tag. Semantisch gruppiert es den einleitenden Bereich (Hero). Das ist besser für die Barrierefreiheit als ein reines `<div>`.
+- **Z. 8** Die Hauptüberschrift der Seite. Jede Seite sollte genau eine `<h1>` haben.
+- **Z. 9** Ein Absatz mit dem Untertitel.
+- **Z. 12** Ein Absatz mit der Beschreibung.
+- **Z. 16** Ein Container (`div`), der die beiden Buttons nebeneinander anordnet (gesteuert durch Flexbox in `Home.css`).
+- **Z. 17** Ein `<Link>`, der auf `/matching` verweist. Das ist die React-Router-Variante des `<a href>`-Tags.
+- **Z. 18** Ein weiterer `<Link>`. Der Button hat hier die zusätzliche Klasse `secondary`. Das ermöglicht in `Home.css` ein anderes Styling (z. B. einen hellgrauen Hintergrund), um den primären vom sekundären Button zu unterscheiden.
+- **Z. 22** Ein `<section>` für die Feature-Karten.
+- **Z. 23–26** Die erste Karte. Sie verwendet die Klasse `.card`, die global in `App.css` definiert ist (weißer Hintergrund, Schatten). `Home.css` fügt über `.features .card` noch einen Hover-Effekt hinzu.
+- **Z. 28** Das `&amp;` ist eine HTML-Entity, die im Browser als kaufmännisches Und (&) dargestellt wird. In JSX würde in vielen Fällen auch ein einfaches `&` funktionieren, `&amp;` ist aber die formal korrekte HTML-Schreibweise.
+- **Z. 37** Ein `<section>` für die Statistiken (die drei Zahlen).
+- **Z. 39, 43, 47** Die Zahl selbst steht in einem `<span>`-Element. Das ist wichtig, weil die Zahl in `Home.css` eine andere Schriftgröße (`2.2rem`) und Farbe bekommt als der Text darunter.
+- **Z. 40, 44, 48** Die Beschreibung der Zahl steht in einem `<p>`.
 
-Z. 2 Importiert die spezifischen Styles für die Startseite.
+> **Hinweis zur Barrierefreiheit:** In Z. 17 und 18 steckt ein `<button>` innerhalb eines `<Link>` (also eines `<a>`). Laut HTML-Standard ist ein interaktives Element in einem anderen interaktiven Element nicht erlaubt. Sauberer wäre ein `<Link>` mit einer Button-Klasse, z. B. `<Link to="/matching" className="button">…</Link>`. Für eine Demo funktioniert die gezeigte Variante, in einem Gespräch lohnt sich aber der Hinweis, dass man das Problem kennt.
 
-Z. 6 <div className="home"> ist der äußerste Wrapper. Er dient in Home.css als „Anker" für spezifische Styles (z.B. .home .hero), damit diese nicht versehentlich auf andere Seiten wirken.
-
-Z. 7 Ein <section>-Tag. Semantisch gruppiert es den einleitenden Bereich (Hero). Das ist besser für die Barrierefreiheit als ein reines <div>.
-
-Z. 8 Die Hauptüberschrift der Seite. Jede Seite sollte genau eine <h1> haben.
-
-Z. 9 Ein Absatz mit dem Untertitel.
-
-Z. 12 Ein Absatz mit der Beschreibung.
-
-Z. 16 Ein Container (div), der die beiden Buttons nebeneinander anordnet (gesteuert durch Flexbox in Home.css).
-
-Z. 17 Ein <Link>, der auf /matching verweist. Das ist die React-Router-Variante des <a href>-Tags.
-
-Z. 18 Ein weiterer <Link>. Der Button hat hier die zusätzliche Klasse secondary. Das ermöglicht in Home.css ein anderes Styling (z.B. einen hellgrauen Hintergrund), um den primären vom sekundären Button zu unterscheiden.
-
-Z. 22 Ein <section> für die Feature-Karten.
-
-Z. 23–25 Die erste Karte. Sie verwendet die Klasse .card, die global in App.css definiert ist (weißer Hintergrund, Schatten). Home.css fügt über .features .card noch einen Hover-Effekt hinzu.
-
-Z. 28 Das &amp; ist eine HTML-Entity, die im Browser als kaufmännisches Und (&) dargestellt wird. In JSX könnte man auch einfach & schreiben, aber die Entity ist sicherer, falls der Code später in ein anderes Format (z.B. XML) exportiert wird.
-
-Z. 37 Ein <section> für die Statistiken (die drei Zahlen).
-
-Z. 39, 43, 47 Die Zahl selbst steht in einem <span>-Element. Das ist wichtig, weil die Zahl in Home.css eine andere Schriftgröße (2.2rem) und Farbe bekommt als der Text darunter.
-
-Z. 40, 44, 48 Die Beschreibung der Zahl steht in einem <p>.
-
+---
 
 ## Datei: `src/pages/About.jsx` (Über uns)
 
@@ -176,54 +166,51 @@ Z. 40, 44, 48 Die Beschreibung der Zahl steht in einem <p>.
  72 | }
  73 |
  74 | export default About
+```
 
+> **Hinweis:** In Z. 34 steht hier „in die gesamte Customer Journey“ (grammatisch korrekt, „die Customer Journey“ ist feminin). Damit Doku und Code übereinstimmen, sollte derselbe Satz auch in `About.jsx` im Projekt so lauten.
 
-     Z. 1 Importiert die spezifischen Styles für die About-Seite.
+### Zeile für Zeile
 
-    Z. 5 Der äußere Wrapper mit der Klasse about. Er dient wieder als „Anker" für die Styles (z.B. .about .intro).
+- **Z. 1** Importiert die spezifischen Styles für die About-Seite.
+- **Z. 5** Der äußere Wrapper mit der Klasse `about`. Er dient wieder als „Anker“ für die Styles (z. B. `.about .intro`).
+- **Z. 6** Die Hauptüberschrift.
+- **Z. 7–11** Der Einleitungsabsatz. In Z. 9 wird das `<strong>`-Tag verwendet, um „5I's-Modell“ fett darzustellen.
+- **Z. 13** Der Bereich für die 5 I's.
+- **Z. 14** Eine Unterüberschrift (`<h2>`).
+- **Z. 15** Ein Container für das Grid (in `About.css` als CSS-Grid definiert). Dadurch werden die fünf Karten automatisch nebeneinander (und bei wenig Platz untereinander) angeordnet.
+- **Z. 16–20** Die erste Karte (Identification). Jede Karte hat ein Icon (als Emoji), eine Überschrift (`<h3>`) und einen Beschreibungstext (`<p>`).
+- **Z. 21–40** Die restlichen vier Karten. Sie folgen exakt demselben Muster.
+- **Z. 44–60** Der Bereich für die Zielgruppen.
+- **Z. 46** Ein Grid für die beiden Zielgruppen-Karten. Sie verwenden die globale Klasse `.card` aus `App.css`.
+- **Z. 56–59** Ein besonderer Absatz (`.cluster-hint`), der in `About.css` als „Pill“ (abgerundeter Balken) gestaltet ist. Hier werden `<strong>` (fett) und `<em>` (kursiv) kombiniert, um die Cluster-Namen hervorzuheben.
+- **Z. 62–69** Der Bereich für die Versprechen.
+- **Z. 64** Eine ungeordnete Liste (`<ul>`).
+- **Z. 65–67** Die drei Listeneinträge (`<li>`). In `About.css` ist definiert, dass diese Liste keine Punkte (Bullets) hat und stattdessen jeder Eintrag wie eine kleine Karte aussieht.
 
-    Z. 6 Die Hauptüberschrift.
+---
 
-    Z. 7–11 Der Einleitungsabsatz. In Z. 9 wird das <strong>-Tag verwendet, um „5I's-Modell" fett darzustellen.
+## Typische Fragen
 
-    Z. 13 Der Bereich für die 5 I's.
+**Warum verwenden wir `<section>` und nicht einfach nur `<div>`?**
+`<section>` ist semantisch bedeutungsvoller. Ein Screenreader kann daraus schließen, dass es sich um einen eigenständigen inhaltlichen Abschnitt handelt. Ein `<div>` hat keine semantische Bedeutung.
 
-    Z. 14 Eine Unterüberschrift (<h2>).
+**Was ist der Unterschied zwischen `<strong>` und `<b>`?**
+`<strong>` bedeutet „wichtiger Inhalt“ und wird von Screenreadern betont vorgelesen. `<b>` ist nur „fett“ (rein visuell). In modernem HTML bevorzugt man `<strong>`.
 
-    Z. 15 Ein Container für das Grid (in About.css als CSS-Grid definiert). Dadurch werden die fünf Karten automatisch nebeneinander (und bei wenig Platz untereinander) angeordnet.
+**Warum schreiben wir `&amp;` statt `&`?**
+In HTML ist das kaufmännische Und ein Sonderzeichen, mit dem Entities wie `&copy;` beginnen. In JSX funktioniert in den meisten Fällen auch ein einfaches `&`, aber `&amp;` ist die standardkonforme Schreibweise und vermeidet Missverständnisse, z. B. in Attributen.
 
-    Z. 16–20 Die erste Karte (Identification). Jede Karte hat ein Icon (als Emoji), eine Überschrift (<h3>) und einen Beschreibungstext (<p>).
+**Wie funktioniert das Grid in `About.css` ohne Media Query?**
+Durch `grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))`. Das bedeutet: „Erzeuge so viele Spalten wie möglich, jede mindestens 180 px breit, und verteile den restlichen Platz gleichmäßig (`1fr`).“ Wenn der Bildschirm schmaler wird, brechen die Karten automatisch in die nächste Zeile um. Das ist ein sehr elegantes, responsives Muster.
 
-    Z. 21–40 Die restlichen vier Karten. Sie folgen exakt demselben Muster.
+**Warum gibt es in `About.jsx` keine `useState`- oder `useEffect`-Hooks?**
+Weil diese Seite rein statisch ist. Sie zeigt nur Inhalte an und hat keine Interaktion, die einen Zustand erfordern würde.
 
-    Z. 44–60 Der Bereich für die Zielgruppen.
+---
 
-    Z. 46 Ein Grid für die beiden Zielgruppen-Karten.
+## Mach es selbst
 
-    Z. 56–59 Ein besonderer Absatz (.cluster-hint), der in About.css als „Pill" (abgerundeter Balken) gestaltet ist. Hier werden <strong> (fett) und <em> (kursiv) kombiniert, um die Cluster-Namen hervorzuheben.
-
-    Z. 62–69 Der Bereich für die Versprechen.
-
-    Z. 64 Eine ungeordnete Liste (<ul>).
-
-    Z. 65–67 Die drei Listeneinträge (<li>). In About.css ist definiert, dass diese Liste keine Punkte (Bullets) hat und stattdessen jeder Eintrag wie eine kleine Karte aussieht.
-
-Typische Fragen
-
-    Warum verwenden wir <section> und nicht einfach nur <div>? <section> ist semantisch bedeutungsvoller. Ein Screenreader kann daraus schließen, dass es sich um einen eigenständigen inhaltlichen Abschnitt handelt. Ein <div> hat keine semantische Bedeutung.
-
-    Was ist der Unterschied zwischen <strong> und <b>? <strong> bedeutet „wichtiger Inhalt" und wird von Screenreadern betont vorgelesen. <b> ist nur „fett" (rein visuell). In modernem HTML bevorzugt man <strong>.
-
-    Warum schreiben wir &amp; statt &? In JSX (und HTML) ist das kaufmännische Und ein Sonderzeichen. In den meisten Fällen funktioniert auch ein einfaches &, aber &amp; ist der standardisierte Weg und vermeidet Fehler, falls der Code in anderen Kontexten (z.B. in Attributen oder in XML) verwendet wird.
-
-    Wie funktioniert das Grid in About.css ohne Media Query? Durch grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)). Das bedeutet: „Erzeuge so viele Spalten wie möglich, jede mindestens 180px breit, und verteile den restlichen Platz gleichmäßig (1fr)." Wenn der Bildschirm schmaler wird, brechen die Karten automatisch in die nächste Zeile um. Das ist ein sehr elegantes, responsives Muster.
-
-    Warum gibt es in About.jsx keine useState- oder useEffect-Hooks? Weil diese Seite rein statisch ist. Sie zeigt nur Inhalte an und hat keine Interaktion, die einen Zustand erfordern würde.
-
-Mach es selbst
-
-    Ändere in Home.jsx die Zahl 79+ auf 100+. Was siehst du? (Die Zahl in der Statistik wird aktualisiert.)
-
-    Füge in About.jsx einen sechsten is-card-Block hinzu (z.B. mit dem Icon „🚀" und dem Titel „Innovation"). Was passiert mit dem Layout? (Das Grid passt sich automatisch an – die Karten werden etwas schmaler oder rutschen in die nächste Zeile.)
-
-    Ändere in Home.css die Hintergrundfarbe des .hero-Bereichs auf #000000 (schwarz). Was passiert mit dem Text? (Du wirst sehen, dass der Text plötzlich schwer lesbar ist – warum? Weil die Textfarbe in App.css dunkelgrau ist. Das ist ein gutes Beispiel dafür, warum man Kontraste immer prüfen sollte.)
+1. Ändere in `Home.jsx` die Zahl `79+` auf `100+`. Was siehst du? (Die Zahl in der Statistik wird aktualisiert.)
+2. Füge in `About.jsx` einen sechsten `is-card`-Block hinzu (z. B. mit dem Icon „🚀“ und dem Titel „Innovation“). Was passiert mit dem Layout? (Das Grid passt sich automatisch an: Die Karten werden etwas schmaler oder rutschen in die nächste Zeile.)
+3. Ändere in `Home.css` die Hintergrundfarbe des `.hero`-Bereichs auf `#000000` (Schwarz). Was passiert mit dem Text? (Du wirst sehen, dass der Text plötzlich schwer lesbar ist. Warum? Weil die Textfarbe in `App.css` dunkelgrau ist. Das ist ein gutes Beispiel dafür, warum man Kontraste immer prüfen sollte.)
