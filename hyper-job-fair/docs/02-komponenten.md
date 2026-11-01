@@ -6,16 +6,24 @@ In React besteht die Oberfläche aus vielen kleinen, wiederverwendbaren Baustein
 
 ## 1. Komponenten und Props
 
-Eine React-Komponente ist eine JavaScript-Funktion, die JSX zurückgibt. Man verwendet sie in einer anderen Komponente, indem man ihren Namen wie ein HTML-Tag schreibt (z.B. `<Header />`).
+Eine React-Komponente ist eine JavaScript-Funktion, die JSX zurückgibt. Man verwendet sie in einer anderen Komponente, indem man ihren Namen wie ein HTML-Tag schreibt (z. B. `<Header />`). Auf diese Weise sind Komponenten ineinander verschachtelt: `App` enthält `Header`, `Footer` und die Seiten, die Seiten enthalten wiederum eigene HTML-Elemente.
 
 **Props** (Kurz für „Properties") sind die Parameter, die man einer Komponente übergibt. Sie funktionieren wie HTML-Attribute. Wenn man einer Komponente Daten von außen mitgeben möchte, schreibt man sie als Attribut in das Tag:
 
 ```jsx
-// Beispiel: So würde man Props übergeben
+// Beispiel (kommt im Projekt so nicht vor): So würde man Props übergeben
 <Footer copyrightText="© 2026 Hyper Job Fair" />
+```
+
+`Header` und `Footer` in diesem Projekt brauchen keine Props, weil ihr Inhalt immer gleich ist.
+
+---
 
 ## Datei: `src/components/Header.jsx` (Der Header)
 
+Der Code ist derselbe wie in Kapitel 1. Hier liegt der Fokus auf dem Aufbau einer Komponente.
+
+```jsx
   1 | import { NavLink } from 'react-router-dom'
   2 | import './Header.css'
   3 |
@@ -39,21 +47,21 @@ Eine React-Komponente ist eine JavaScript-Funktion, die JSX zurückgibt. Man ver
  21 | }
  22 |
  23 | export default Header
+```
 
- Z. 6 Der Name der Komponente. In React müssen Komponentennamen immer mit einem Großbuchstaben beginnen (Header, nicht header). Das ist der wichtigste Unterschied zu normalen HTML-Tags, die immer klein geschrieben werden.
+### Zeile für Zeile
 
-Z. 8–19 Das return der Funktion gibt das JSX zurück. Das <header>-Element bildet das semantische Grundgerüst für den Kopfbereich. Alles, was in diesem Tag steht, wird auf der Seite gerendert.
+- **Z. 6** Der Name der Komponente. In React müssen Komponentennamen immer mit einem Großbuchstaben beginnen (`Header`, nicht `header`). Das ist der wichtigste Unterschied zu normalen HTML-Tags, die immer klein geschrieben werden.
+- **Z. 7–20** Das `return` der Funktion gibt das JSX zurück. Das `<header>`-Element bildet das semantische Grundgerüst für den Kopfbereich. Alles, was in diesem Tag steht, wird auf der Seite gerendert.
+- **Z. 9** `<div className="logo">` ist ein normales HTML-Element innerhalb der Komponente. Wir können so viele HTML-Elemente verschachteln, wie wir wollen.
+- **Z. 12** Das `<nav>`-Element ist das semantische Element für Navigationsbereiche. Screenreader können so gezielt zu dieser Navigation springen.
+- **Z. 23** `export default Header` macht die Komponente für andere Dateien importierbar. In `App.jsx` haben wir sie mit `import Header from './components/Header'` eingebunden.
 
-Z. 9 <div className="logo"> ist ein normales HTML-Element innerhalb der Komponente. Wir können so viele HTML-Elemente verschachteln, wie wir wollen.
-
-Z. 12 Das <nav>-Element ist das semantische Element für Navigationsbereiche. Screenreader können so gezielt zu dieser Navigation springen.
-
-Z. 23 export default Header macht die Komponente für andere Dateien importierbar. In App.jsx haben wir sie mit import Header from './components/Header' eingebunden.
-
+---
 
 ## Datei: `src/components/Footer.jsx` (Der Footer)
 
-
+```jsx
   1 | import './Footer.css'
   2 |
   3 | function Footer() {
@@ -66,56 +74,58 @@ Z. 23 export default Header macht die Komponente für andere Dateien importierba
  10 | }
  11 |
  12 | export default Footer
+```
 
- Z. 1 Importiert das Stylesheet für den Footer.
+### Zeile für Zeile
 
-Z. 3 Der Name der Komponente (Footer mit großem F).
+- **Z. 1** Importiert das Stylesheet für den Footer.
+- **Z. 3** Der Name der Komponente (`Footer` mit großem F).
+- **Z. 5** Ein `<footer>`-Tag. Auch das ist ein semantisches HTML-Element.
+- **Z. 6** Ein Absatz. Das `&copy;` ist eine HTML-Entity und wird im Browser als Copyright-Symbol (©) dargestellt. In JSX schreibt man Entities genauso wie in HTML.
+- **Z. 7** Ein zweiter Absatz mit dem Hinweis auf das 5I-Modell.
+- **Z. 12** Der Export, damit die Komponente in `App.jsx` verwendet werden kann.
 
-Z. 5 Ein <footer>-Tag. Auch das ist ein semantisches HTML-Element.
+---
 
-Z. 6 Ein Absatz. Das &copy; ist eine HTML-Entity und wird im Browser als Copyright-Symbol (©) dargestellt. In JSX schreibt man Entities genauso wie in HTML.
-
-Z. 7 Ein zweiter Absatz mit dem Hinweis auf das 5I-Modell.
-
-Z. 12 Der Export, damit die Komponente in App.jsx verwendet werden kann.
-
-
-Wie CSS in React funktioniert
+## Wie CSS in React funktioniert
 
 In React ist es üblich, CSS-Dateien direkt in die Komponente zu importieren, die sie braucht:
+
+```jsx
 import './Header.css' // in Header.jsx
 import './Footer.css' // in Footer.jsx
+```
 
-Das unterscheidet sich von normalem HTML (wo man <link>-Tags im <head> benutzt). In React übernimmt der Bundler (Vite), was wohin gehört.
+Das unterscheidet sich von normalem HTML (wo man `<link>`-Tags im `<head>` benutzt). In React übernimmt der Bundler (Vite), was wohin gehört.
 
+**Wichtig zu wissen:**
 
-Wichtig zu wissen:
+- Wenn Vite das Projekt baut, fügt es alle importierten CSS-Dateien zu einer einzigen großen CSS-Datei zusammen.
+- Es gibt in diesem Projekt kein CSS-Scoping (wie bei CSS Modules). Die Klassen `.logo`, `.card` usw. sind global verfügbar. Wenn zwei Komponenten dieselbe Klasse verwenden (z. B. `.card`), teilen sie sich die Styles.
+- Deshalb haben wir in den Komponenten spezifische Selektoren (z. B. `.features .card` in `Home.css`), um Konflikte zu vermeiden.
 
-    Wenn Vite das Projekt baut, fügt es alle importierten CSS-Dateien zu einer einzigen großen CSS-Datei zusammen.
+**Fazit zu CSS in React:** In React importiert man CSS-Dateien in die Komponenten (z. B. `import './Header.css'`). Vite fasst sie beim Bauen zusammen. Die Styles sind global, deshalb sollte man eindeutige Klassennamen verwenden.
 
-    Es gibt in diesem Projekt kein CSS-Scoping (wie CSS Modules). Die Klassen .logo, .card etc. sind global verfügbar. Wenn zwei Komponenten dieselbe Klasse verwenden (z.B. .card), teilen sie sich die Styles.
+---
 
-    Deshalb haben wir in den Komponenten spezifische Klassen (z.B. .features .card in Home.css), um Konflikte zu vermeiden.
+## Typische Fragen
 
-Fazit zu CSS in React:
-In React importiert man CSS-Dateien in die Komponenten (z.B. import './Header.css'). Vite fasst sie beim Bauen zusammen. Die Styles sind global – deshalb sollte man eindeutige Klassennamen verwenden.
+**Was ist der Unterschied zwischen einer Komponente und einer normalen Funktion?**
+Eine Komponente gibt JSX zurück und wird in React mit `<KomponentenName />` verwendet. Eine normale Funktion gibt irgendeinen Wert zurück. Hooks wie `useState` dürfen nur innerhalb von Komponenten (oder eigenen Hooks) aufgerufen werden, nicht in beliebigen Funktionen.
 
+**Warum schreiben wir `export default Header` und nicht `export Header`?**
+`export default` erlaubt es, die Komponente beim Import beliebig zu benennen (z. B. `import Nav from './Header'`). Bei einem benannten Export (`export { Header }`) müsste der Name beim Import exakt übereinstimmen. In React-Projekten ist `export default` bei Komponenten üblich.
 
-Typische Fragen
+**Kann ich CSS auch direkt in JSX schreiben?**
+Ja, mit dem `style`-Attribut. Aber das ist oft unübersichtlich, weil man ein Objekt übergeben muss (z. B. `style={{ color: 'red' }}`). In diesem Projekt verwenden wir externe CSS-Dateien, was wartbarer ist.
 
-    Was ist der Unterschied zwischen einer Komponente und einer normalen Funktion? Eine Komponente gibt JSX zurück und wird in React mit <KomponentenName /> verwendet. Eine normale Funktion gibt irgendeinen Wert zurück. (In React kann eine Komponente auch andere Hooks wie useState enthalten, was normale Funktionen nicht dürfen.)
+**Warum heißt die CSS-Datei `Header.css` und nicht `header.css`?**
+Konvention: Komponenten-Dateien beginnen mit Großbuchstaben (`Header.jsx`), also benennt man die zugehörige CSS-Datei genauso. Das macht die Struktur übersichtlich.
 
-    Warum schreiben wir export default Header und nicht export Header? export default erlaubt es, die Komponente beim Import beliebig zu benennen (z.B. import Nav from './Header'). Bei export müsste der Name exakt übereinstimmen. In React-Projekten ist export default bei Komponenten üblich.
+---
 
-    Kann ich CSS auch direkt in JSX schreiben? Ja, mit dem style-Attribut. Aber das ist oft unübersichtlich, weil man ein Objekt übergeben muss (z.B. style={{ color: 'red' }}). In diesem Projekt verwenden wir externe CSS-Dateien, was wartbarer ist.
+## Mach es selbst
 
-    Warum heißt die CSS-Datei Header.css und nicht header.css? Konvention: Komponenten-Dateien beginnen mit Großbuchstaben (Header.jsx), also benennt man die zugehörige CSS-Datei genauso. Das macht die Struktur übersichtlich.
-    
-
-Mach es selbst
-
-    Ändere den Text im Footer auf „© 2027 Hyper Job Fair – Alle Rechte vorbehalten". Was siehst du?
-
-    Füge im Header.jsx einen neuen NavLink hinzu, der auf /test zeigt (die Route hast du in Kapitel 1 selbst angelegt). Was passiert beim Klick darauf?
-
-    Ändere in Header.css die Hintergrundfarbe (background: white;) auf background: #e0f5f0; (ein helles Türkis). Was passiert? (Der Header bekommt einen farbigen Hintergrund.)
+1. Ändere den Text im Footer auf „© 2027 Hyper Job Fair – Alle Rechte vorbehalten“. Was siehst du?
+2. Füge in `Header.jsx` einen neuen `NavLink` hinzu, der auf `/test` zeigt (die Route hast du in Kapitel 1 selbst angelegt). Was passiert beim Klick darauf?
+3. Ändere in `Header.css` die Hintergrundfarbe (`background: white;`) auf `background: #e0f5f0;` (ein helles Türkis). Was passiert? (Der Header bekommt einen farbigen Hintergrund.)
