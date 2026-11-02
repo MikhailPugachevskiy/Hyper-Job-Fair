@@ -21,7 +21,7 @@ Lies die Kapitel in dieser Reihenfolge:
 
 ## So sind die Kapitel aufgebaut
 
-1. **Der Code** mit Zeilennummern, wie er im Projekt steht. Längere Dateien sind teilweise gekürzt (erkennbar an `...` oder Kommentaren) und entsprechend gekennzeichnet.
+1. **Der Code** mit den originalen Zeilennummern, wie er im Projekt steht. Bei längeren Dateien werden nur Auszüge gezeigt. Ausgelassene Stellen sind mit `...` und dem Zeilenbereich gekennzeichnet.
 2. **Zeile für Zeile**: Jeder Punkt beginnt mit der Zeilennummer (zum Beispiel „Z. 4") und erklärt, was die Zeile macht und warum.
 3. **Typische Fragen**, wie sie in einem Vorstellungsgespräch kommen könnten, mit Antworten.
 4. **Mach es selbst**: kleine Aufgaben, die du lokal ausprobieren kannst.
