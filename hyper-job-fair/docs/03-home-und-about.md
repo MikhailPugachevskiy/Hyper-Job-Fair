@@ -168,7 +168,7 @@ Da diese Seiten keine komplexe Logik (wie Zustände oder Berechnungen) enthalten
  74 | export default About
 ```
 
-> **Hinweis:** In Z. 34 steht hier „in die gesamte Customer Journey“ (grammatisch korrekt, „die Customer Journey“ ist feminin). Damit Doku und Code übereinstimmen, sollte derselbe Satz auch in `About.jsx` im Projekt so lauten.
+> **Hinweis:** In Z. 34 steht hier „in die gesamte Customer Journey“ (grammatisch korrekt, „die Customer Journey“ ist feminin). In `About.jsx` im Repository steht dort bisher „in den gesamten Customer Journey“. Bitte ändere den Satz im Code, damit Doku und Code übereinstimmen.
 
 ### Zeile für Zeile
 
@@ -213,4 +213,4 @@ Weil diese Seite rein statisch ist. Sie zeigt nur Inhalte an und hat keine Inter
 
 1. Ändere in `Home.jsx` die Zahl `79+` auf `100+`. Was siehst du? (Die Zahl in der Statistik wird aktualisiert.)
 2. Füge in `About.jsx` einen sechsten `is-card`-Block hinzu (z. B. mit dem Icon „🚀“ und dem Titel „Innovation“). Was passiert mit dem Layout? (Das Grid passt sich automatisch an: Die Karten werden etwas schmaler oder rutschen in die nächste Zeile.)
-3. Ändere in `Home.css` die Hintergrundfarbe des `.hero`-Bereichs auf `#000000` (Schwarz). Was passiert mit dem Text? (Du wirst sehen, dass der Text plötzlich schwer lesbar ist. Warum? Weil die Textfarbe in `App.css` dunkelgrau ist. Das ist ein gutes Beispiel dafür, warum man Kontraste immer prüfen sollte.)
+3. Ersetze in `Home.css` den `background`-Wert von `.home .hero` (aktuell ein heller Farbverlauf) durch `#000000` (Schwarz). Was passiert mit dem Text? (Du wirst sehen, dass der Text plötzlich schwer lesbar ist. Warum? Weil die Texte dunkelgrau (`#555`, `#666`) bzw. dunkeltürkis (die Überschrift) sind. Das ist ein gutes Beispiel dafür, warum man Kontraste immer prüfen sollte.)
