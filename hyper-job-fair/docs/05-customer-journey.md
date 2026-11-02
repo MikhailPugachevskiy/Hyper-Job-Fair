@@ -4,7 +4,7 @@ Die Seite „Customer Journey" zeigt die drei Phasen einer Jobmesse: Vor der Mes
 
 Technisch gesehen ist das eine schöne Übung im **bedingten Rendern**: Wir haben drei große JSX-Blöcke, aber es soll immer nur genau einer davon angezeigt werden. 
 
-> **Hinweis:** Im Listing unten sind die Inhalte der drei Phasen durch Kommentare ersetzt. Der Block „Vor der Messe“ steht weiter unten in voller Länge. Die Zeilennummern ab Z. 39 gelten für das gekürzte Listing.
+> **Hinweis:** Die Datei `CustomerJourney.jsx` hat 92 Zeilen und wird hier in Auszügen mit den **originalen Zeilennummern** gezeigt. Die Phasen „Während der Messe“ (Z. 51–65) und „Nach der Messe“ (Z. 67–80) sind zusammengefasst, weil sie genauso aufgebaut sind wie „Vor der Messe“.
 
 ---
 
@@ -19,6 +19,8 @@ const [activePhase, setActivePhase] = useState('before')
 ---
 
 ## Datei: `src/pages/CustomerJourney.jsx`
+
+### Teil 1: State, Tabs und die erste Phase (Z. 1–49)
 
 ```jsx
   1 | import { useState } from 'react'
@@ -59,62 +61,6 @@ const [activePhase, setActivePhase] = useState('before')
  36 |                 {activePhase === 'before' && (
  37 |                     <div className="phase-card">
  38 |                         <h2>Vor der Messe – Perfekt vorbereitet</h2>
- 39 |                         {/* ... Inhalt ... */}
- 40 |                     </div>
- 41 |                 )}
- 42 |
- 43 |                 {activePhase === 'during' && (
- 44 |                     <div className="phase-card">
- 45 |                         <h2>Während der Messe – Effizient und interaktiv</h2>
- 46 |                         {/* ... Inhalt ... */}
- 47 |                     </div>
- 48 |                 )}
- 49 |
- 50 |                 {activePhase === 'after' && (
- 51 |                     <div className="phase-card">
- 52 |                         <h2>Nach der Messe – Nachhaltige Bindung</h2>
- 53 |                         {/* ... Inhalt ... */}
- 54 |                     </div>
- 55 |                 )}
- 56 |             </div>
- 57 |         
- 58 |             <div className="journey-visual">
- 59 |                 <div className="milestone">1. Cheap</div>
- 60 |                 <div className="milestone">2. Flawless</div>
- 61 |                 <div className="milestone">3. Secure</div>
- 62 |             </div>
- 63 |         </div>
- 64 |     )
- 65 | }
- 66 |
- 67 | export default CustomerJourney
-```
-
-### Zeile für Zeile
-
-- **Z. 1** Importiert `useState`.
-- **Z. 5** Der State `activePhase` startet mit dem Wert `'before'`. Das bedeutet: Wenn die Seite zum ersten Mal geladen wird, ist der erste Tab aktiv.
-- **Z. 14** Ein Container für die drei Tab-Buttons.
-- **Z. 16** Hier passiert die „Magie“ für das Styling: Wenn `activePhase` gerade `'before'` ist, gibt der Ausdruck `'active'` zurück, andernfalls einen leeren String `''`. Die CSS-Klasse `active` (definiert in `CustomerJourney.css`) sorgt dann dafür, dass der Button türkis hinterlegt wird.
-- **Z. 17** Der Klick-Handler: `onClick` ruft `setActivePhase('before')` auf. Dadurch wird der State geändert und React zeichnet die Komponente neu.
-- **Z. 22** Das Gleiche für den zweiten Tab.
-- **Z. 28** Und für den dritten Tab.
-- **Z. 35** Ein Container für den Inhalt unterhalb der Tabs.
-- **Z. 36–41** Bedingtes Rendern mit `&&`: Der Ausdruck `activePhase === 'before' && ( ... )` bedeutet: „Wenn `activePhase` gleich `'before'` ist, rendere den Klammerinhalt. Andernfalls rendere nichts.“ Das ist ein sehr häufiges React-Muster, um Elemente nur unter bestimmten Bedingungen anzuzeigen.
-- **Z. 43–48** Das Gleiche für die mittlere Phase (`during`).
-- **Z. 50–55** Das Gleiche für die letzte Phase (`after`).
-
-**Wichtig zu wissen:** Alle drei Blöcke stehen im Code untereinander. Aber React rendert immer nur den Block, dessen Bedingung `true` ist. Die anderen beiden werden ignoriert (sie erzeugen kein DOM-Element).
-
----
-
-## Der komplette Inhalt einer Phase (Beispiel)
-
-
-```jsx
- 36 |                 {activePhase === 'before' && (
- 37 |                     <div className="phase-card">
- 38 |                         <h2>Vor der Messe – Perfekt vorbereitet</h2>
  39 |                         <ul>
  40 |                             <li><strong>LinkedIn-Import</strong> – Profil automatisch übertragen</li>
  41 |                             <li><strong>Orientierungstest</strong> – Unternehmen laden Tests hoch, du bekommst bessere Matches</li>
@@ -128,31 +74,61 @@ const [activePhase, setActivePhase] = useState('before')
  49 |                 )}
 ```
 
-- **Z. 37** Ein `<div>` mit der Klasse `phase-card`. In `CustomerJourney.css` definiert sie das Aussehen der weißen Karte.
-- **Z. 38** Die Überschrift der Phase.
-- **Z. 39–44** Eine Liste mit den vier wichtigsten Features dieser Phase. Jedes `<li>` enthält ein `<strong>`-Tag, um den Feature-Namen hervorzuheben.
-- **Z. 45–47** Ein Beispiel-Block. Die Klasse `.example` stylt ihn als abgerundete Box in Hellgrün mit kursiver Schrift.
-
-Dieses Muster wiederholt sich exakt für die anderen beiden Phasen (`during` und `after`). Der einzige Unterschied sind die Texte.
-
----
-
-## Die drei „Milestones" am Ende
-
-Im Listing oben sind das die Zeilen 58–62:
+### Teil 2: Die anderen beiden Phasen (Z. 51–80, zusammengefasst)
 
 ```jsx
- 58 |             <div className="journey-visual">
- 59 |                 <div className="milestone">1. Cheap</div>
- 60 |                 <div className="milestone">2. Flawless</div>
- 61 |                 <div className="milestone">3. Secure</div>
- 62 |             </div>
+ 51 |                 {activePhase === 'during' && (
+ 52 |                     <div className="phase-card">
+ 53 |                         <h2>Während der Messe – Effizient und interaktiv</h2>
+    ...                     (Z. 54–64: Liste mit fünf Punkten und ein Beispiel-Block)
+ 65 |                 )}
+
+ 67 |                 {activePhase === 'after' && (
+ 68 |                     <div className="phase-card">
+ 69 |                         <h2>Nach der Messe – Nachhaltige Bindung</h2>
+    ...                     (Z. 70–79: Liste mit vier Punkten und ein Beispiel-Block)
+ 80 |                 )}
 ```
 
-- **Z. 58** Ein Container für die drei „Versprechen“ (Milestones).
-- **Z. 59–61** Drei `<div>`-Elemente mit der Klasse `milestone`. In `CustomerJourney.css` sind sie als türkise Pill-Buttons gestaltet.
+### Teil 3: Ende der Seite mit den Milestones (Z. 81–92)
 
-**Wichtig:** Diese drei Milestones sind nicht vom `activePhase`-State abhängig. Sie sind immer sichtbar, egal welcher Tab gerade aktiv ist. Das ist eine Design-Entscheidung: Die Versprechen gelten für alle Phasen gleichermaßen.
+```jsx
+ 81 |             </div>
+ 82 |
+ 83 |             <div className="journey-visual">
+ 84 |                 <div className="milestone">1. Cheap</div>
+ 85 |                 <div className="milestone">2. Flawless</div>
+ 86 |                 <div className="milestone">3. Secure</div>
+ 87 |             </div>
+ 88 |         </div>
+ 89 |     )
+ 90 | }
+ 91 |
+ 92 | export default CustomerJourney
+```
+
+### Zeile für Zeile
+
+- **Z. 1** Importiert `useState`.
+- **Z. 5** Der State `activePhase` startet mit dem Wert `'before'`. Das bedeutet: Wenn die Seite zum ersten Mal geladen wird, ist der erste Tab aktiv.
+- **Z. 14** Ein Container für die drei Tab-Buttons.
+- **Z. 16** Hier passiert die „Magie“ für das Styling: Wenn `activePhase` gerade `'before'` ist, gibt der Ausdruck `'active'` zurück, andernfalls einen leeren String `''`. Die CSS-Klasse `active` (`.phase-tabs button.active` in `CustomerJourney.css`) sorgt dann dafür, dass der Button türkis hinterlegt wird.
+- **Z. 17** Der Klick-Handler: `onClick` ruft `setActivePhase('before')` auf. Dadurch wird der State geändert und React zeichnet die Komponente neu.
+- **Z. 22** Das Gleiche für den zweiten Tab.
+- **Z. 28** Und für den dritten Tab.
+- **Z. 35** Ein Container für den Inhalt unterhalb der Tabs. In `CustomerJourney.css` bekommt `.phase-content` das Aussehen der weißen, abgerundeten Karte mit Schatten.
+- **Z. 36–49** Bedingtes Rendern mit `&&`: Der Ausdruck `activePhase === 'before' && ( ... )` bedeutet: „Wenn `activePhase` gleich `'before'` ist, rendere den Klammerinhalt. Andernfalls rendere nichts.“ Das ist ein sehr häufiges React-Muster, um Elemente nur unter bestimmten Bedingungen anzuzeigen.
+- **Z. 37** Ein `<div>` mit der Klasse `phase-card`. Die Klasse wird in `CustomerJourney.css` genutzt, um die Liste darin zu gestalten (`.phase-card ul` und `.phase-card li`, z. B. mit feinen Trennlinien zwischen den Einträgen).
+- **Z. 38** Die Überschrift der Phase.
+- **Z. 39–44** Eine Liste mit den vier wichtigsten Features dieser Phase. Jedes `<li>` enthält ein `<strong>`-Tag, um den Feature-Namen hervorzuheben.
+- **Z. 45–47** Ein Beispiel-Block. Die Klasse `.example` stylt ihn als abgerundete Box mit sehr hellem Grünton, dunkeltürkiser und kursiver Schrift.
+- **Z. 51–65** Das Gleiche für die mittlere Phase (`during`).
+- **Z. 67–80** Das Gleiche für die letzte Phase (`after`).
+- **Z. 83–87** Ein Container (`journey-visual`) für die drei „Versprechen“ (Milestones). Die drei `<div>`-Elemente mit der Klasse `milestone` sind in `CustomerJourney.css` als türkise Pills gestaltet.
+
+**Wichtig zu wissen:** Alle drei Blöcke stehen im Code untereinander. Aber React rendert immer nur den Block, dessen Bedingung `true` ist. Die anderen beiden werden ignoriert (sie erzeugen kein DOM-Element).
+
+Die drei Milestones (Z. 83–87) liegen **außerhalb** von `phase-content` und sind nicht vom `activePhase`-State abhängig. Sie sind immer sichtbar, egal welcher Tab gerade aktiv ist. Das ist eine Design-Entscheidung: Die Versprechen gelten für alle Phasen gleichermaßen.
 
 ---
 
@@ -177,7 +153,7 @@ In der Matching-Demo gab es vier States, die sich unabhängig voneinander änder
 
 ## Mach es selbst
 
-1. Ändere den Startwert von `activePhase` auf `'during'`. Welcher Tab ist beim Laden der Seite aktiv?
+1. Ändere den Startwert von `activePhase` (Z. 5) auf `'during'`. Welcher Tab ist beim Laden der Seite aktiv?
 2. Füge einen vierten Tab-Button hinzu, der `setActivePhase('extra')` aufruft. Was passiert, wenn du ihn anklickst? (Du siehst keinen Inhalt, weil es keinen `{activePhase === 'extra' && (...)}`-Block gibt.)
-3. Ändere in `CustomerJourney.css` die Farbe der aktiven Tabs (`background: #00b4a0;`) auf `#ef4444` (Rot). Was passiert?
+3. Ändere in `CustomerJourney.css` die Farbe der aktiven Tabs (`.phase-tabs button.active`, dort `background: #00b4a0;`) auf `#ef4444` (Rot). Was passiert? (Die Milestones bleiben türkis, weil sie in der Klasse `.milestone` eine eigene Farbe haben.)
 4. Überlege: Warum ist es besser, einen einzigen State (`activePhase`) zu verwenden, anstatt drei separate (`showBefore`, `showDuring`, `showAfter`)? (Weil man so nicht versehentlich zwei Tabs gleichzeitig aktiv haben kann. Der Zustand ist eindeutig.)
