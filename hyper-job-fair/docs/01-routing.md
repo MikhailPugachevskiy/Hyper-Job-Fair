@@ -97,7 +97,7 @@ In diesem Projekt wird das Routing durch die Bibliothek **React Router** (Versio
 - **Z. 8** Ein `<header>`-Tag. In `Header.css` ist es als `sticky` definiert (bleibt oben kleben) und hat einen Schatten.
 - **Z. 9–11** Der Logo-Bereich. Das `className="logo"` wird in `Header.css` in der Farbe Türkis-Grün (`#008c7a`) gestylt.
 - **Z. 12** Das `<nav>`-Element fasst die Links semantisch zusammen.
-- **Z. 13–17** Fünf `NavLink`-Komponenten. `to="/"` ist das Ziel (die URL). `className={navClass}` übergibt die Funktion von Z. 4. React Router fügt dann automatisch die Klasse `active` hinzu, wenn die Route übereinstimmt. Dadurch wird der aktive Link in `Header.css` fett und unterstrichen dargestellt.
+- **Z. 13–17** Fünf `NavLink`-Komponenten. `to="/"` ist das Ziel (die URL). `className={navClass}` übergibt die Funktion von Z. 4. React Router fügt dann automatisch die Klasse `active` hinzu, wenn die Route übereinstimmt. Dadurch wird der aktive Link in `Header.css` (`nav a.active`) in einem dunkleren Türkis mit türkisem Unterstrich dargestellt.
 - **Z. 23** Exportiert die `Header`-Komponente.
 
 ---
@@ -138,7 +138,7 @@ In diesem Projekt wird das Routing durch die Bibliothek **React Router** (Versio
 Weil sie auf jeder Seite sichtbar sein sollen. Wenn sie innerhalb von `<Routes>` stünden, müsste man sie bei jeder einzelnen Route erneut einbinden. Das wäre redundant und fehleranfällig.
 
 **Was ist der Unterschied zwischen `<Link>` und `<NavLink>`?**
-Beide erzeugen einen HTML-Link (`<a>`), aber `<NavLink>` weiß, ob die Route gerade aktiv ist, und kann sich entsprechend stylen (z. B. fett und unterstrichen). `<Link>` hat diese Funktion nicht.
+Beide erzeugen einen HTML-Link (`<a>`), aber `<NavLink>` weiß, ob die Route gerade aktiv ist, und kann sich entsprechend stylen (z. B. farbig hervorgehoben und unterstrichen). `<Link>` hat diese Funktion nicht.
 
 **Was ist ein „Hook“?**
 Eine spezielle Funktion in React, die man nur innerhalb von Komponenten (und eigenen Hooks) aufrufen darf. Sie beginnt immer mit `use` (z. B. `useState`, `useEffect`, `useLocation`). Hooks geben uns Zugriff auf React-Funktionen wie State, Seiteneffekte oder den Router.
