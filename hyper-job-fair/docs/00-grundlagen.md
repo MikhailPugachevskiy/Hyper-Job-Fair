@@ -52,30 +52,34 @@ Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt
 ```html
   1 | <!doctype html>
   2 | <html lang="de">
-  3 |   <head>
-  4 |     <meta charset="UTF-8" />
-  5 |     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  6 |     <meta name="description" content="Hyper Job Fair – Die hyper-personalisierte digitale Jobmesse mit Matching, Chat und individuellem Feedback." />
-  7 |     <title>Hyper Job Fair – Die personalisierte Jobmesse</title>
-  8 |   </head>
-  9 |   <body>
- 10 |     <div id="root"></div>
- 11 |     <script type="module" src="/src/main.jsx"></script>
- 12 |   </body>
- 13 | </html>
+  3 |
+  4 | <head>
+  5 |     <meta charset="UTF-8" />
+  6 |     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  7 |     <meta name="description" 
+  8 |         content="Hyper Job Fair – Die hyper-personalisierte digitale Jobmesse mit Matching, Chat und individuellem Feedback." />
+  9 |     <title>Hyper Job Fair – Die personalisierte Jobmesse</title>
+ 10 | </head>
+ 11 |
+ 12 | <body>
+ 13 |     <div id="root"></div>
+ 14 |     <script type="module" src="/src/main.jsx"></script>
+ 15 | </body>
+ 16 |
+ 17 | </html>
 ```
 
 ### Zeile für Zeile
 
 - **Z. 1** Sagt dem Browser, dass es sich um eine HTML5-Datei handelt.
 - **Z. 2** Das Attribut `lang="de"` teilt Screenreadern und Suchmaschinen mit, dass die Seite auf Deutsch ist (wichtig für Barrierefreiheit und SEO).
-- **Z. 3–8** Der `<head>`-Bereich enthält Metadaten, die nicht direkt auf der Seite sichtbar sind.
-- **Z. 4** Stellt sicher, dass Umlaute (ä, ö, ü) und Sonderzeichen (€) korrekt dargestellt werden (UTF-8).
-- **Z. 5** Sorgt dafür, dass die Seite auf mobilen Geräten (Smartphones, Tablets) richtig skaliert wird, anstatt verkleinert dargestellt zu werden.
-- **Z. 6** Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen.
-- **Z. 7** Der Text, der im Browser-Tab angezeigt wird.
-- **Z. 10** Das ist der wichtigste Teil! Hier ist ein leeres `<div>` mit der ID `root`. React sucht dieses Element und fügt die gesamte App dort ein. Wenn dieses `<div>` fehlt, bleibt die Seite leer.
-- **Z. 11** Lädt die Datei `main.jsx`. Das `type="module"` sagt dem Browser, dass er die Datei als JavaScript-Modul behandeln soll (wichtig für `import`/`export`). Der Pfad beginnt mit `/`, das heißt: relativ zum Projekt-Root.
+- **Z. 4–10** Der `<head>`-Bereich enthält Metadaten, die nicht direkt auf der Seite sichtbar sind.
+- **Z. 5** Stellt sicher, dass Umlaute (ä, ö, ü) und Sonderzeichen (€) korrekt dargestellt werden (UTF-8).
+- **Z. 6** Sorgt dafür, dass die Seite auf mobilen Geräten (Smartphones, Tablets) richtig skaliert wird, anstatt verkleinert dargestellt zu werden.
+- **Z. 7-8** Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen. (Der Tag ist wegen der Länge auf zwei Zeilen verteilt.)
+- **Z. 9** Der Text, der im Browser-Tab angezeigt wird.
+- **Z. 13** Das ist der wichtigste Teil! Hier ist ein leeres `<div>` mit der ID `root`. React sucht dieses Element und fügt die gesamte App dort ein. Wenn dieses `<div>` fehlt, bleibt die Seite leer.
+- **Z. 14** Lädt die Datei `main.jsx`. Das `type="module"` sagt dem Browser, dass er die Datei als JavaScript-Modul behandeln soll (wichtig für `import`/`export`). Der Pfad beginnt mit `/`, das heißt: relativ zum Projekt-Root.
 
 ---
 
