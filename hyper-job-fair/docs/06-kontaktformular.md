@@ -20,8 +20,6 @@ Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die
 
 ## Datei: `src/pages/Contact.jsx`
 
-> **Hinweis:** Im Listing sind die Info-Karten durch einen Kommentar ersetzt (gekürzt).
-
 ```jsx
   1 | import { useState } from 'react'
   2 | import './Contact.css'
@@ -36,48 +34,60 @@ Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die
  11 |
  12 |     const handleSubmit = (e) => {
  13 |         e.preventDefault()
- 14 |         setSent(true)
- 15 |         setTimeout(() => setSent(false), 4000)
- 16 |     }
- 17 |
- 18 |     return (
- 19 |         <div className="contact">
- 20 |             <h1>Kontakt</h1>
- 21 |             <p className="sub">
- 22 |                 Du hast Fragen, Ideen oder möchtest mit uns kooperieren? Schreib uns!
- 23 |             </p>
- 24 |
- 25 |             <div className="contact-grid">
- 26 |                 <div className="contact-info">
- 27 |                     {/* ... Info-Karten ... */}
- 28 |                 </div>
- 29 |
- 30 |                 <div className="contact-form">
- 31 |                     {sent ? (
- 32 |                         <div className="success-message">
- 33 |                             ✅ Vielen Dank! Wir melden uns bei dir.
- 34 |                         </div>
- 35 |                     ) : (
- 36 |                         <form onSubmit={handleSubmit}>
- 37 |                             <label htmlFor="name">Dein Name</label>
- 38 |                             <input type="text" id="name" name="name" value={form.name} onChange={handleChange} required />
- 39 |
- 40 |                             <label htmlFor="email">Deine E-Mail</label>
- 41 |                             <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
- 42 |
- 43 |                             <label htmlFor="message">Nachricht</label>
- 44 |                             <textarea id="message" name="message" rows="5" value={form.message} onChange={handleChange} required></textarea>
- 45 |
- 46 |                             <button type="submit">Absenden</button>
- 47 |                         </form>
- 48 |                     )}
- 49 |                 </div>
- 50 |             </div>
- 51 |         </div>
- 52 |     )
- 53 | }
+ 14 |         // Hier könnte ein API-Call stehen – wir simulieren nur.
+ 15 |         setSent(true)
+ 16 |         setTimeout(() => setSent(false), 4000)
+ 17 |     }
+ 18 |
+ 19 |     return (
+ 20 |         <div className="contact">
+ 21 |             <h1>Kontakt</h1>
+ 22 |             <p className="sub">
+ 23 |                 Du hast Fragen, Ideen oder möchtest mit uns kooperieren? Schreib uns!
+ 24 |             </p>
+ 25 |
+ 26 |             <div className="contact-grid">
+ 27 |                 <div className="contact-info">
+ 28 |                     <div className="card">
+ 29 |                         <h3>📧 E-Mail</h3>
+ 30 |                         <p>team@hyperjobfair.de</p>
+ 31 |                     </div>
+ 32 |                     <div className="card">
+ 33 |                         <h3>📍 Standort</h3>
+ 34 |                         <p>Köln, Deutschland (virtuell überall erreichbar)</p>
+ 35 |                     </div>
+ 36 |                     <div className="card">
+ 37 |                         <h3>🌐 Social Media</h3>
+ 38 |                         <p>#HyperJobFair – folge uns auf LinkedIn und Instagram!</p>
+ 39 |                     </div>
+ 40 |                 </div>
+ 41 |
+ 42 |                 <div className="contact-form">
+ 43 |                     {sent ? (
+ 44 |                         <div className="success-message">
+ 45 |                             ✅ Vielen Dank! Wir melden uns bei dir.
+ 46 |                         </div>
+ 47 |                     ) : (
+ 48 |                         <form onSubmit={handleSubmit}>
+ 49 |                             <label htmlFor="name">Dein Name</label>
+ 50 |                             <input type="text" id="name" name="name" value={form.name} onChange={handleChange} required />
+ 51 |
+ 52 |                             <label htmlFor="email">Deine E-Mail</label>
+ 53 |                             <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
  54 |
- 55 | export default Contact
+ 55 |                             <label htmlFor="message">Nachricht</label>
+ 56 |                             <textarea id="message" name="message" rows="5" value={form.message} onChange={handleChange} required></textarea>
+ 57 |
+ 58 |                             <button type="submit">Absenden</button>
+ 59 |                         </form>
+ 60 |                     )}
+ 61 |                 </div>
+ 62 |             </div>
+ 63 |         </div>
+ 64 |     )
+ 65 | }
+ 66 |
+ 67 | export default Contact
 ```
 
 ### Zeile für Zeile
@@ -93,21 +103,23 @@ Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die
   - Ergebnis: ein neues Form-Objekt, bei dem nur das geänderte Feld aktualisiert wurde, die anderen bleiben gleich.
 - **Z. 12–16** Die Funktion `handleSubmit`. Sie wird aufgerufen, wenn das Formular abgeschickt wird.
 - **Z. 13** `e.preventDefault()`: Das ist entscheidend! Normalerweise würde ein HTML-Formular beim Absenden die Seite neu laden (und die Daten an eine URL schicken). Da wir aber eine Single Page Application (SPA) sind, wollen wir das nicht. `preventDefault()` verhindert das Standardverhalten des Browsers.
-- **Z. 14** Setzt `sent` auf `true`. Dadurch wird sofort die Erfolgsmeldung angezeigt (siehe Z. 31).
-- **Z. 15** `setTimeout`: Nach 4000 Millisekunden (4 Sekunden) wird `sent` wieder auf `false` gesetzt. Das Formular wird erneut angezeigt.
-- **Z. 31** Bedingtes Rendern: `sent ? ( ... ) : ( ... )`. Wenn `sent` den Wert `true` hat, wird die Erfolgsmeldung angezeigt. Andernfalls (`:`) wird das Formular angezeigt.
-- **Z. 36** `<form onSubmit={handleSubmit}>`: Das `onSubmit`-Event wird ausgelöst, wenn das Formular abgeschickt wird (durch Klick auf den Button oder durch Drücken der Enter-Taste).
-- **Z. 37** `<label htmlFor="name">`: Das Attribut `htmlFor` ist die React-Version von `for`. Es verknüpft das Label mit dem Eingabefeld, das die `id="name"` hat. Dadurch kann der Nutzer auf das Label klicken, um das Feld zu fokussieren. Das ist wichtig für die Barrierefreiheit.
-- **Z. 38** Das Eingabefeld für den Namen:
+- **Z. 14** Ein Kommentar im Code: Hier würde in einer echten Anwendung ein API-Call stehen. In der Demo wird das Absenden nur simuliert, es werden keine Daten verschickt.
+- **Z. 15** Setzt `sent` auf `true`. Dadurch wird sofort die Erfolgsmeldung angezeigt (siehe Z. 43).
+- **Z. 16** `setTimeout`: Nach 4000 Millisekunden (4 Sekunden) wird `sent` wieder auf `false` gesetzt. Das Formular wird erneut angezeigt.
+- **Z. 28–39** Drei Info-Karten mit der globalen Klasse `.card` (E-Mail, Standort, Social Media). Sie sind rein statischer Inhalt.
+- **Z. 43** Bedingtes Rendern: `sent ? ( ... ) : ( ... )`. Wenn `sent` den Wert `true` hat, wird die Erfolgsmeldung angezeigt. Andernfalls (`:`) wird das Formular angezeigt.
+- **Z. 48** `<form onSubmit={handleSubmit}>`: Das `onSubmit`-Event wird ausgelöst, wenn das Formular abgeschickt wird (durch Klick auf den Button oder durch Drücken der Enter-Taste).
+- **Z. 49** `<label htmlFor="name">`: Das Attribut `htmlFor` ist die React-Version von `for`. Es verknüpft das Label mit dem Eingabefeld, das die `id="name"` hat. Dadurch kann der Nutzer auf das Label klicken, um das Feld zu fokussieren. Das ist wichtig für die Barrierefreiheit.
+- **Z. 50** Das Eingabefeld für den Namen:
   - `type="text"`: ein normales Textfeld.
   - `id="name"`: die ID (für das Label).
   - `name="name"`: der Name (wichtig für `e.target.name` in `handleChange`).
   - `value={form.name}`: der Wert kommt aus dem State.
   - `onChange={handleChange}`: bei jeder Eingabe wird der State aktualisiert.
   - `required`: HTML5-Validierung (der Nutzer kann das Feld nicht leer lassen).
-- **Z. 41** Das E-Mail-Feld. `type="email"` sorgt dafür, dass der Browser die Eingabe auf ein gültiges E-Mail-Format prüft.
-- **Z. 44** Das Textfeld für die Nachricht. In HTML steht der Inhalt eines `<textarea>` zwischen den Tags. In React wird er dagegen, genau wie bei `<input>`, über `value` und `onChange` gesteuert.
-- **Z. 46** Der Absende-Button. `type="submit"` ist wichtig, damit er das `onSubmit`-Event des Formulars auslöst.
+- **Z. 53** Das E-Mail-Feld. `type="email"` sorgt dafür, dass der Browser die Eingabe auf ein gültiges E-Mail-Format prüft.
+- **Z. 56** Das Textfeld für die Nachricht. In HTML steht der Inhalt eines `<textarea>` zwischen den Tags. In React wird er dagegen, genau wie bei `<input>`, über `value` und `onChange` gesteuert.
+- **Z. 58** Der Absende-Button. `type="submit"` ist wichtig, damit er das `onSubmit`-Event des Formulars auslöst.
 
 > **Hinweis:** Nach dem Absenden bleiben die eingegebenen Werte im State `form` erhalten. Wenn das Formular nach 4 Sekunden wieder erscheint, sind die Felder noch gefüllt. Für ein echtes Zurücksetzen könnte man in `handleSubmit` zusätzlich `setForm({ name: '', email: '', message: '' })` aufrufen (siehe Aufgabe 5).
 
@@ -151,7 +163,7 @@ Das ist eine Design-Entscheidung. Wenn die Erfolgsmeldung erscheint, ist das For
 ## Mach es selbst
 
 1. Füge ein viertes Eingabefeld hinzu (z. B. „Betreff“). Vergiss nicht, es zum `useState`-Objekt hinzuzufügen (`subject: ''`) und ins Formular einzubauen (`name="subject"`).
-2. Ändere die Zeit in `setTimeout` von `4000` auf `10000` (10 Sekunden). Was passiert?
-3. Entferne testweise `e.preventDefault()` aus `handleSubmit`. Was passiert beim Absenden? (Die Seite lädt neu: Du siehst kurz ein Flackern, und der State wird zurückgesetzt.)
+2. Ändere die Zeit in `setTimeout` (Z. 16) von `4000` auf `10000` (10 Sekunden). Was passiert?
+3. Entferne testweise `e.preventDefault()` (Z. 13). Was passiert beim Absenden? (Die Seite lädt neu: Du siehst kurz ein Flackern, und der State wird zurückgesetzt.)
 4. Überlege: Was passiert, wenn du `value={form.name}` entfernst, aber `onChange` behältst? (Das Feld wird zu einem *unkontrollierten* Feld: Der Nutzer kann ganz normal tippen, und `handleChange` aktualisiert den State trotzdem. Das Feld wird aber nicht mehr vom State gesteuert, etwa beim Zurücksetzen. Umgekehrt, also `value` ohne `onChange`, wäre das Feld für den Nutzer schreibgeschützt, und React würde eine Warnung ausgeben. Deshalb gehören `value` und `onChange` bei kontrollierten Feldern immer zusammen.)
 5. Ergänze in `handleSubmit` die Zeile `setForm({ name: '', email: '', message: '' })`. Was siehst du, wenn das Formular nach der Erfolgsmeldung wieder erscheint? (Die Felder sind jetzt leer, weil der State die einzige „Wahrheit“ ist.) 
