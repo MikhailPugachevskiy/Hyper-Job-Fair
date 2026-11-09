@@ -1,8 +1,8 @@
 # 5. Customer Journey: Tabs und bedingtes Rendern
 
-Die Seite „Customer Journey" zeigt die drei Phasen einer Jobmesse: Vor der Messe, Während der Messe und Nach der Messe. Der Nutzer kann über drei Buttons (Tabs) zwischen diesen Phasen wechseln.
+Die Seite „Customer Journey“ zeigt die drei Phasen einer Jobmesse: Vor der Messe, Während der Messe und Nach der Messe. Der Nutzer kann über drei Buttons (Tabs) zwischen diesen Phasen wechseln.
 
-Technisch gesehen ist das eine schöne Übung im **bedingten Rendern**: Wir haben drei große JSX-Blöcke, aber es soll immer nur genau einer davon angezeigt werden. 
+Technisch gesehen ist das eine schöne Übung im **bedingten Rendern**: Wir haben drei große JSX-Blöcke, aber es soll immer nur genau einer davon angezeigt werden.
 
 > **Hinweis:** Die Datei `CustomerJourney.jsx` hat 92 Zeilen und wird hier in Auszügen mit den **originalen Zeilennummern** gezeigt. Die Phasen „Während der Messe“ (Z. 51–65) und „Nach der Messe“ (Z. 67–80) sind zusammengefasst, weil sie genauso aufgebaut sind wie „Vor der Messe“.
 
@@ -10,7 +10,7 @@ Technisch gesehen ist das eine schöne Übung im **bedingten Rendern**: Wir habe
 
 ## Die Idee: Ein State für den aktiven Tab
 
-Anstatt drei separate States zu haben (`zeigeVorher`, `zeigeWaehrend`, `zeigeNachher`), verwenden wir **einen einzigen State**, der sich merkt, welcher Tab gerade aktiv ist. 
+Anstatt drei separate States zu haben (`zeigeVorher`, `zeigeWaehrend`, `zeigeNachher`), verwenden wir **einen einzigen State**, der sich merkt, welcher Tab gerade aktiv ist.
 
 ```jsx
 const [activePhase, setActivePhase] = useState('before')
@@ -126,7 +126,7 @@ const [activePhase, setActivePhase] = useState('before')
 - **Z. 67–80** Das Gleiche für die letzte Phase (`after`).
 - **Z. 83–87** Ein Container (`journey-visual`) für die drei „Versprechen“ (Milestones). Die drei `<div>`-Elemente mit der Klasse `milestone` sind in `CustomerJourney.css` als türkise Pills gestaltet.
 
-**Wichtig zu wissen:** Alle drei Blöcke stehen im Code untereinander. Aber React rendert immer nur den Block, dessen Bedingung `true` ist. Die anderen beiden werden ignoriert (sie erzeugen kein DOM-Element).
+**Wichtig zu wissen:** Alle drei Phasen-Blöcke stehen im Code untereinander. Aber React rendert immer nur den Block, dessen Bedingung `true` ist. Die anderen beiden werden ignoriert (sie erzeugen kein DOM-Element).
 
 Die drei Milestones (Z. 83–87) liegen **außerhalb** von `phase-content` und sind nicht vom `activePhase`-State abhängig. Sie sind immer sichtbar, egal welcher Tab gerade aktiv ist. Das ist eine Design-Entscheidung: Die Versprechen gelten für alle Phasen gleichermaßen.
 
