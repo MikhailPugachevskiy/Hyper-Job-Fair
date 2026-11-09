@@ -21,10 +21,30 @@ Das Projekt wurde mit modernen Web-Technologien umgesetzt:
 - **Vanilla CSS** – Maßgeschneidertes Responsive Design im Koelnmesse-inspirierten Farbschema (Hellgrau & Türkis-Grün)
 - *(Archiv)*: Eine rein statische HTML/CSS/JS-Version des Projekts liegt ebenfalls im Ordner `static-version/`.
 
+## 🗂 Projektstruktur
+```
+Hyper-Job-Fair/
+├── src/                      # React-Code
+│   ├── components/           # Header, Footer, ScrollToTop
+│   ├── pages/                # Home, About, MatchingDemo, CustomerJourney, Contact
+│   ├── App.jsx               # Routing
+│   ├── App.css               # globale Styles
+│   └── main.jsx              # Einstiegsdatei
+├── static-version/           # Archiv: rein statische HTML/CSS/JS-Version
+├── docs/                     # Lern-Dokumentation (Deutsch)
+├── index.html                # HTML-Datei der React-App
+├── package.json
+├── vite.config.js
+├── Hyper personalization in the trade show sector_GroupC2.pdf   # theoretische Ausarbeitung
+├── README.md
+├── .gitignore
+└── .gitattributes
+```
+
 ## 📚 Dokumentation zum Lernen (`docs/`)
 Ein großer Bestandteil dieses Projekts ist die **Lern-Dokumentation**. Der gesamte React-Code wurde Zeile für Zeile analysiert und in einem eigenen `docs/`-Ordner festgehalten. Dies dient nicht nur dem besseren Verständnis für die Gruppenmitglieder, sondern zeigt auch potenziellen Arbeitgebern die tiefe Auseinandersetzung mit der Technologie.
 
-Die Dokumentation ist in folgende Kapitel unterteilt (zu finden im Ordner [`docs/`](docs/)):
+Die Dokumentation ist in folgende Kapitel unterteilt (zu finden im Ordner [`docs/`](docs/README.md)):
 - **[0. Grundlagen](docs/00-grundlagen.md)**: React, JSX, Vite, Projektstruktur, Einstiegsdatei
 - **[1. Routing](docs/01-routing.md)**: React Router, Navigation, aktive Links, ScrollToTop
 - **[2. Komponenten](docs/02-komponenten.md)**: Props, verschachtelte Komponenten, Footer
@@ -41,17 +61,21 @@ Voraussetzung: [Node.js](https://nodejs.org/) muss auf dem System installiert se
 1. Repository klonen:
    ```bash
    git clone https://github.com/MikhailPugachevskiy/Hyper-Job-Fair.git
+   ```
 
 2. In den Projektordner wechseln:
    ```bash
-   cd Hyper-Job-Fair/hyper-job-fair
+   cd Hyper-Job-Fair
+   ```
 
 3. Abhängigkeiten installieren:
    ```bash
    npm install
+   ```
 
 4. Entwicklungsserver starten:
    ```bash
    npm run dev
+   ```
 
 5. Die Webseite ist nun unter http://localhost:5173/ erreichbar.
