@@ -34,16 +34,16 @@ Eine Komponente darf nur **ein** Wurzelelement zurückgeben. Wenn man mehrere Ge
 | --- | --- | --- |
 | **Props** | Daten und Funktionen von oben nach unten | im Projekt selbst nicht genutzt, das Konzept wird in Kapitel 2 erklärt |
 | **`useState`** | merkt sich einen Wert zwischen den Zeichnungen | `MatchingDemo.jsx`, `CustomerJourney.jsx`, `Contact.jsx` |
-| **`useEffect`** | führt etwas „außerhalb des Zeichnens" aus | `ScrollToTop.jsx` (scrollt nach oben) |
+| **`useEffect`** | führt etwas „außerhalb des Zeichnens“ aus | `ScrollToTop.jsx` (scrollt nach oben) |
 | **`key`** | gibt Listenelementen eine feste Identität | `MatchingDemo.jsx` (bei `.map`) |
 | **kontrollierte Eingabe** | der Wert eines Feldes kommt aus dem State | `Contact.jsx` |
 | **bedingtes Zeichnen** | `a && <X />` oder `a ? <X /> : <Y />` | `MatchingDemo.jsx`, `CustomerJourney.jsx`, `Contact.jsx` |
 
 ## 4. Der Aufbau des Projekts
 
-Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt nur eine einzige HTML-Datei (`index.html`). Wenn der Nutzer auf „About" klickt, wird die Seite **nicht** neu geladen. Stattdessen tauscht React im Hintergrund nur die Komponente aus, die im `<main>`-Bereich angezeigt wird.
+Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt nur eine einzige HTML-Datei (`index.html`). Wenn der Nutzer auf „About“ klickt, wird die Seite **nicht** neu geladen. Stattdessen tauscht React im Hintergrund nur die Komponente aus, die im `<main>`-Bereich angezeigt wird.
 
-**Das wichtigste Prinzip:** Der Zustand (z. B. „welcher Tab ist offen?" oder „welche Jobs habe ich geliked?") liegt immer in der Komponente, die ihn braucht. Er wird nicht global gespeichert, sondern lokal in der jeweiligen Seite. Wenn der Nutzer die Seite wechselt, wird der State zurückgesetzt. Das ist bei einer Demo völlig ausreichend.
+**Das wichtigste Prinzip:** Der Zustand (z. B. „welcher Tab ist offen?“ oder „welche Jobs habe ich geliked?“) liegt immer in der Komponente, die ihn braucht. Er wird nicht global gespeichert, sondern lokal in der jeweiligen Seite. Wenn der Nutzer die Seite wechselt, wird der State zurückgesetzt. Das ist bei einer Demo völlig ausreichend.
 
 ---
 
@@ -56,7 +56,7 @@ Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt
   4 | <head>
   5 |     <meta charset="UTF-8" />
   6 |     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  7 |     <meta name="description" 
+  7 |     <meta name="description"
   8 |         content="Hyper Job Fair – Die hyper-personalisierte digitale Jobmesse mit Matching, Chat und individuellem Feedback." />
   9 |     <title>Hyper Job Fair – Die personalisierte Jobmesse</title>
  10 | </head>
@@ -76,7 +76,7 @@ Dieses Projekt ist eine **Single Page Application (SPA)**. Das bedeutet: Es gibt
 - **Z. 4–10** Der `<head>`-Bereich enthält Metadaten, die nicht direkt auf der Seite sichtbar sind.
 - **Z. 5** Stellt sicher, dass Umlaute (ä, ö, ü) und Sonderzeichen (€) korrekt dargestellt werden (UTF-8).
 - **Z. 6** Sorgt dafür, dass die Seite auf mobilen Geräten (Smartphones, Tablets) richtig skaliert wird, anstatt verkleinert dargestellt zu werden.
-- **Z. 7-8** Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen. (Der Tag ist wegen der Länge auf zwei Zeilen verteilt.)
+- **Z. 7–8** Eine kurze Beschreibung der Seite. Suchmaschinen wie Google nutzen diesen Text in den Suchergebnissen. (Der Tag ist wegen der Länge auf zwei Zeilen verteilt.)
 - **Z. 9** Der Text, der im Browser-Tab angezeigt wird.
 - **Z. 13** Das ist der wichtigste Teil! Hier ist ein leeres `<div>` mit der ID `root`. React sucht dieses Element und fügt die gesamte App dort ein. Wenn dieses `<div>` fehlt, bleibt die Seite leer.
 - **Z. 14** Lädt die Datei `main.jsx`. Das `type="module"` sagt dem Browser, dass er die Datei als JavaScript-Modul behandeln soll (wichtig für `import`/`export`). Der Pfad beginnt mit `/`, das heißt: relativ zum Projekt-Root.
