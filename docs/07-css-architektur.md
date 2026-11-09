@@ -1,6 +1,6 @@
 # 7. CSS-Architektur: Styling in einer React-App
 
-In diesem Projekt gibt es keine einzige große CSS-Datei, sondern mehrere kleinere. Das ist in React üblich: Jede Komponente (oder Seite) importiert ihre eigene CSS-Datei. 
+In diesem Projekt gibt es keine einzige große CSS-Datei, sondern mehrere kleinere. Das ist in React üblich: Jede Komponente (oder Seite) importiert ihre eigene CSS-Datei.
 
 Dieses Kapitel erklärt, wie diese Dateien zusammenarbeiten, wie das globale Design (Farben, Schriften) definiert ist und wie die wichtigsten Layout-Techniken (Flexbox und Grid) in diesem Projekt funktionieren.
 
@@ -10,13 +10,13 @@ Dieses Kapitel erklärt, wie diese Dateien zusammenarbeiten, wie das globale Des
 
 Es gibt zwei Arten von CSS-Dateien in diesem Projekt:
 
-1. **Globale Styles (`src/App.css`):** 
+1. **Globale Styles (`src/App.css`):**
    Sie wird einmal in `main.jsx` importiert (`import './App.css'`) und gilt für die gesamte App. Hier stehen das Reset (Standardabstände entfernen), die Grundschrift, die Farben für Überschriften, der generische Button-Stil und die globale Klasse `.card`.
 
 2. **Komponenten-Styles (z. B. `Header.css`, `Home.css`):**
    Sie werden direkt in der jeweiligen Komponente importiert (z. B. `import './Header.css'` in `Header.jsx`). Sie sind **gedanklich** einer Komponente zugeordnet, technisch gelten sie aber trotzdem für die ganze App.
 
-**Wichtig:** React macht hier kein echtes „Scoping". Alle importierten CSS-Dateien landen im selben globalen Stylesheet. Wenn du in `Home.css` die Klasse `.card` stylst und in `About.css` auch `.card`, dann überschreiben sich diese Styles gegenseitig (je nachdem, welche Datei später geladen wird). Deshalb verwendet dieses Projekt spezifische Selektoren, um Konflikte zu vermeiden:
+**Wichtig:** React macht hier kein echtes „Scoping“. Alle importierten CSS-Dateien landen im selben globalen Stylesheet. Wenn du in `Home.css` die Klasse `.card` stylst und in `About.css` auch `.card`, dann überschreiben sich diese Styles gegenseitig (je nachdem, welche Datei später geladen wird). Deshalb verwendet dieses Projekt spezifische Selektoren, um Konflikte zu vermeiden:
 
 - In `Home.css` heißt es `.features .card` (nur Karten innerhalb des Features-Bereichs).
 - In `About.css` heißt es `.is-card` (ein eigener Name für die Karten in der 5I-Ansicht).
@@ -42,8 +42,10 @@ body {
     line-height: 1.6;
 }
 
-h1, h2, h3 {
-    font-weight: 300; /* Dünne Schrift für einen modernen Look */
+h1,
+h2,
+h3 {
+    font-weight: 300;
     letter-spacing: 0.5px;
 }
 
@@ -61,7 +63,7 @@ Die Zeile `font-weight: 300` sorgt für dünne Schrift und damit für einen mode
 
 ## 3. Layout-Techniken: Flexbox vs. Grid
 
-In den CSS-Dateien werden zwei Haupttechniken verwendet, um Elemente anzuordnen:
+In den CSS-Dateien werden zwei Haupttechniken verwendet, um Elemente anzuordnen.
 
 ### Flexbox (eindimensional)
 
@@ -105,8 +107,8 @@ Das ist ein sehr mächtiger Einzeiler (`grid-template-columns`). Er bedeutet:
 
 - `display: grid`: Aktiviere das Grid-Layout.
 - `repeat(auto-fit, ...)`: Erzeuge so viele Spalten, wie in die aktuelle Breite passen.
-- `minmax(220px, 1fr)`: Jede Spalte ist mindestens 220px breit. Wenn mehr Platz da ist, teilen sich die Spalten den restlichen Platz gleichmäßig auf (`1fr` = ein Bruchteil).
-- `gap`: 1.5rem: Der Abstand zwischen den Karten.
+- `minmax(220px, 1fr)`: Jede Spalte ist mindestens 220 px breit. Wenn mehr Platz da ist, teilen sich die Spalten den restlichen Platz gleichmäßig auf (`1fr` = ein Bruchteil).
+- `gap: 1.5rem`: der Abstand zwischen den Karten.
 
 **Was passiert also auf einem schmalen Bildschirm?** Wenn nicht mehr genug Platz für zwei Karten à 220 px ist, bricht das Grid automatisch auf eine Spalte um. Das ist ein responsives Layout ohne Media Query. Dasselbe Muster nutzt `About.css` für die 5I-Karten (`minmax(180px, 1fr)`).
 
@@ -114,19 +116,19 @@ Das ist ein sehr mächtiger Einzeiler (`grid-template-columns`). Er bedeutet:
 
 ## 4. Media Queries (für den Feinschliff)
 
-Media Queries werden nur an wenigen Stellen verwendet, um das Layout für kleine Bildschirme (Smartphones) anzupassen: in `App.css` (768 px), `Header.css` (700 px), `Contact.css` (700 px) und `MatchingDemo.css` (500 px). Das Beispiel aus `Header.css
+Media Queries werden nur an wenigen Stellen verwendet, um das Layout für kleine Bildschirme (Smartphones) anzupassen: in `App.css` (768 px), `Header.css` (700 px), `Contact.css` (700 px) und `MatchingDemo.css` (500 px). Das Beispiel aus `Header.css`:
 
 ```css
 @media (max-width: 700px) {
     header {
-        flex-direction: column; 
+        flex-direction: column;
         padding: 0.8rem;
     }
 
     nav {
         margin-top: 0.5rem;
         display: flex;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
         justify-content: center;
     }
 
@@ -136,16 +138,16 @@ Media Queries werden nur an wenigen Stellen verwendet, um das Layout für kleine
 }
 ```
 
-- `max-width: 700px`: Diese Regel gilt nur, wenn der Bildschirm schmaler als 700px ist.
-- `flex-direction: column`: Ändert die Richtung von „nebeneinander" zu „untereinander". Logo und Navigation stehen dann übereinander, das ist auf schmalen Bildschirmen besser lesbar.
+- `max-width: 700px`: Diese Regel gilt, wenn der Bildschirm höchstens 700 px breit ist.
+- `flex-direction: column`: Ändert die Richtung von „nebeneinander“ zu „untereinander“. Logo und Navigation stehen dann übereinander, das ist auf schmalen Bildschirmen besser lesbar.
 - `flex-wrap: wrap` bei `nav`: Die Links brechen in die nächste Zeile um, wenn der Platz nicht reicht.
 - `nav a`: Auf kleinen Bildschirmen bekommen die Links einen anderen Abstand (rechts und unten statt links wie auf dem Desktop).
 
---- 
+---
 
 ## 5. Details, die dem Projekt seinen Charakter geben
 
-### Die „Pill"-Form
+### Die „Pill“-Form
 
 Viele Elemente (Buttons, Tags, aktive Tabs) haben eine stark abgerundete Form. Das wird durch einen großen `border-radius` erreicht. Im Projekt hat der generische Button in `App.css` diese Regel:
 
@@ -162,7 +164,7 @@ button {
 }
 ```
 
-Ein Wert, der mindestens halb so groß ist wie die Höhe des Elements, ergibt eine perfekte Pillenform. Mit einem sehr großen Wert (z. B. `999px`) klappt das unabhängig von der Höhe.
+Ein `border-radius`, der mindestens halb so groß ist wie die Höhe des Elements, ergibt eine perfekte Pillenform. Mit einem sehr großen Wert (z. B. `999px`) klappt das unabhängig von der Höhe.
 
 ### Der Hover-Effekt bei Karten
 
@@ -181,7 +183,7 @@ Die Karten in `Home.css` heben sich leicht an, wenn man mit der Maus darüber f�
 ```
 
 - `translateY(-4px)`: Verschiebt die Karte um 4 Pixel nach oben. Das erzeugt den Eindruck, als würde sie schweben.
-- `transition`: Sorgt dafür, dass diese Bewegung nicht ruckartig, sondern fließend (über 0.2 Sekunden) passiert. Weil die Eigenschaft in der Basisregel (`.features .card`) steht und nicht in `:hover`, ist sowohl das Anheben als auch das Zurückgleiten animiert.
+- `transition: transform 0.2s`: Sorgt dafür, dass diese Bewegung nicht ruckartig, sondern fließend (über 0,2 Sekunden) passiert. Weil die Eigenschaft in der Basisregel (`.features .card`) steht und nicht in `:hover`, ist sowohl das Anheben als auch das Zurückgleiten animiert.
 
 ### Schatten für Tiefe
 
@@ -256,6 +258,8 @@ button:hover {
 ```
 
 Dann würde eine Änderung in `:root` das gesamte Design ändern.
+
+---
 
 ## Mach es selbst
 
