@@ -8,7 +8,7 @@ In React besteht die Oberfläche aus vielen kleinen, wiederverwendbaren Baustein
 
 Eine React-Komponente ist eine JavaScript-Funktion, die JSX zurückgibt. Man verwendet sie in einer anderen Komponente, indem man ihren Namen wie ein HTML-Tag schreibt (z. B. `<Header />`). Auf diese Weise sind Komponenten ineinander verschachtelt: `App` enthält `Header`, `Footer` und die Seiten, die Seiten enthalten wiederum eigene HTML-Elemente.
 
-**Props** (Kurz für „Properties") sind die Parameter, die man einer Komponente übergibt. Sie funktionieren wie HTML-Attribute. Wenn man einer Komponente Daten von außen mitgeben möchte, schreibt man sie als Attribut in das Tag:
+**Props** (kurz für „Properties“) sind die Parameter, die man einer Komponente übergibt. Sie funktionieren wie HTML-Attribute. Wenn man einer Komponente Daten von außen mitgeben möchte, schreibt man sie als Attribut in das Tag:
 
 ```jsx
 // Beispiel (kommt im Projekt so nicht vor): So würde man Props übergeben
