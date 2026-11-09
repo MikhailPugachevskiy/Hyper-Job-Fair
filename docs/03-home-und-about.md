@@ -1,6 +1,6 @@
 # 3. Home & About: Inhalte in JSX strukturieren
 
-In diesem Kapitel schauen wir uns die beiden Seiten an, die hauptsächlich dazu dienen, Informationen zu präsentieren: die Startseite (`Home.jsx`) und die "Über uns"-Seite (`About.jsx`). 
+In diesem Kapitel schauen wir uns die beiden Seiten an, die hauptsächlich dazu dienen, Informationen zu präsentieren: die Startseite (`Home.jsx`) und die „Über uns“-Seite (`About.jsx`).
 
 Da diese Seiten keine komplexe Logik (wie Zustände oder Berechnungen) enthalten, steht hier das **semantische HTML** und die **Strukturierung von JSX** im Vordergrund. Du wirst sehen, wie man HTML-Elemente in React kombiniert und wie man CSS-Klassen wiederverwendet.
 
@@ -125,7 +125,7 @@ Da diese Seiten keine komplexe Logik (wie Zustände oder Berechnungen) enthalten
  31 |                     <div className="is-card">
  32 |                         <span className="icon">🔗</span>
  33 |                         <h3>Integration</h3>
- 34 |                         <p>Nahtlose Einbindung in den gesamten Customer Journey – von der Vorbereitung bis zum Follow-up.</p>
+ 34 |                         <p>Nahtlose Einbindung in die gesamte Customer Journey – von der Vorbereitung bis zum Follow-up.</p>
  35 |                     </div>
  36 |                     <div className="is-card">
  37 |                         <span className="icon">🛡️</span>
