@@ -1,6 +1,6 @@
 # 4. Matching-Demo: Interaktion mit `useState`
 
-Bisher waren die Seiten hauptsächlich statisch (Home, About). In der **Matching-Demo** passiert endlich etwas Dynamisches: Der Nutzer kann Jobangebote nach links (nicht interessiert) oder rechts (interessiert) wischen. 
+Bisher waren die Seiten hauptsächlich statisch (Home, About). In der **Matching-Demo** passiert endlich etwas Dynamisches: Der Nutzer kann Jobangebote nach links (nicht interessiert) oder rechts (interessiert) wischen.
 
 Dieses Kapitel ist das Wichtigste für dein React-Verständnis. Es zeigt dir, wie man mit **State** (Zustand) arbeitet, wie man auf **Events** (Ereignisse wie Klicks) reagiert und wie man **Listen** rendert.
 
@@ -12,7 +12,7 @@ Dieses Kapitel ist das Wichtigste für dein React-Verständnis. Es zeigt dir, wi
 
 In React ist eine Komponente eine Funktion. Wenn diese Funktion aufgerufen wird, um etwas auf dem Bildschirm zu zeichnen, vergisst sie normalerweise alles, was in ihren Variablen stand.
 
-Der Hook `useState` löst dieses Problem. Er ist das „Gedächtnis" der Komponente. Er speichert einen Wert zwischen den Zeichnungen. Wenn sich dieser Wert ändert, zeichnet React die Komponente automatisch neu. 
+Der Hook `useState` löst dieses Problem. Er ist das „Gedächtnis“ der Komponente. Er speichert einen Wert zwischen den Zeichnungen. Wenn sich dieser Wert ändert, zeichnet React die Komponente automatisch neu.
 
 ```jsx
 const [wert, setWert] = useState(0)
@@ -23,7 +23,7 @@ const [wert, setWert] = useState(0)
 
 ---
 
-## Datei: `src/pages/MatchingDemo.jsx` 
+## Datei: `src/pages/MatchingDemo.jsx`
 
 ### Teil 1: Import und Daten (Z. 1–46)
 
@@ -49,7 +49,7 @@ const [wert, setWert] = useState(0)
 - **Z. 2** Importiert die Styles der Seite.
 - **Z. 4** Ein Kommentar: Die Angebote sind erfundene Beispieldaten.
 - **Z. 5–46** Die Datenquelle. Hier stehen die 5 Jobangebote als Array von Objekten. Diese Daten sind fest im Code (hardcoded) und ändern sich nie. Sie liegen **außerhalb** der Komponente, weil sie nicht zum State gehören.
-- **Z. 7–12** Jedes Angebot hat dieselben sechs Felder: `id` (eindeutig), `company`, `title`, `description`, `tags` (ein Array aus Texten) und `match` (Prozentwert). 
+- **Z. 7–12** Jedes Angebot hat dieselben sechs Felder: `id` (eindeutig), `company`, `title`, `description`, `tags` (ein Array aus Texten) und `match` (Prozentwert).
 
 ### Teil 2: State und Logik (Z. 48–77)
 
@@ -198,7 +198,7 @@ Weil React Änderungen an Objekten und Arrays nur erkennt, wenn die Referenz auf
 **Was ist der Spread-Operator `...`?**
 Er kopiert alle Elemente aus einem Array oder alle Eigenschaften aus einem Objekt in ein neues Array bzw. Objekt. `[...matches]` erstellt eine flache Kopie des `matches`-Arrays.
 
-**Wozu dient `if (!current) return` in Z. 19?**
+**Wozu dient `if (!current) return` in Z. 57?**
 Es ist eine Absicherung: Gäbe es kein aktuelles Angebot (z. B. weil der Index durch einen Fehler außerhalb des Arrays liegt), würde `handleSwipe` sonst mit `undefined` weiterarbeiten und beim Speichern oder Auslesen Fehler verursachen. Im normalen Ablauf ist `current` immer gültig, weil der Index beim letzten Angebot nicht mehr erhöht wird.
 
 **Warum rufen wir `setMatches`, `setNoMatches`, `setCurrentIndex` und `setFinished` alle in einer Funktion auf?**
