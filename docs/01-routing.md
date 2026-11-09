@@ -1,6 +1,6 @@
 # 1. Routing: Wie die Seiten miteinander verbunden sind
 
-In einer normalen Website würde ein Klick auf „About" eine neue HTML-Datei (`about.html`) vom Server laden. In einer React-App (Single Page Application) gibt es nur eine einzige `index.html`. Das **Routing** sorgt dafür, dass die URL in der Adresszeile aktualisiert wird und React im Hintergrund die passende Komponente austauscht.
+In einer normalen Website würde ein Klick auf „About“ eine neue HTML-Datei (`about.html`) vom Server laden. In einer React-App (Single Page Application) gibt es nur eine einzige `index.html`. Das **Routing** sorgt dafür, dass die URL in der Adresszeile aktualisiert wird und React im Hintergrund die passende Komponente austauscht.
 
 In diesem Projekt wird das Routing durch die Bibliothek **React Router** (Version 6) übernommen.
 
