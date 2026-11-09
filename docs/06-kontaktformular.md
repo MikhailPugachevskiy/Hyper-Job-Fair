@@ -8,13 +8,13 @@ Dieses Kapitel zeigt dir, wie man Formulare in React baut, wie man auf Änderung
 
 ## Die Idee: Kontrollierte Eingaben
 
-In normalem HTML hat ein `<input>`-Feld seinen Wert selbst. Man kann ihn mit `document.getElementById('name').value` auslesen. In React machen wir das anders: 
+In normalem HTML hat ein `<input>`-Feld seinen Wert selbst. Man kann ihn mit `document.getElementById('name').value` auslesen. In React machen wir das anders:
 
 - Der Wert des Feldes wird aus dem **State** gelesen (`value={form.name}`).
 - Wenn der Nutzer tippt, wird der State aktualisiert (`onChange={handleChange}`).
 - React zeichnet das Feld mit dem neuen Wert neu.
 
-Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die einzige „Wahrheit". Wir können den Wert jederzeit programmatisch ändern (z. B. beim Zurücksetzen des Formulars).
+Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die einzige „Wahrheit“. Wir können den Wert jederzeit programmatisch ändern (z. B. beim Zurücksetzen des Formulars).
 
 ---
 
@@ -101,7 +101,7 @@ Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die
   - `[e.target.name]`: der Name des Feldes, das gerade geändert wurde (z. B. `"name"`, `"email"` oder `"message"`). Das ist ein berechneter Eigenschaftsname (*computed property name*). Wenn der Nutzer z. B. in das Namensfeld tippt, wird daraus `name:`.
   - `e.target.value`: der neue Wert, den der Nutzer gerade eingegeben hat.
   - Ergebnis: ein neues Form-Objekt, bei dem nur das geänderte Feld aktualisiert wurde, die anderen bleiben gleich.
-- **Z. 12–16** Die Funktion `handleSubmit`. Sie wird aufgerufen, wenn das Formular abgeschickt wird.
+- **Z. 12–17** Die Funktion `handleSubmit`. Sie wird aufgerufen, wenn das Formular abgeschickt wird.
 - **Z. 13** `e.preventDefault()`: Das ist entscheidend! Normalerweise würde ein HTML-Formular beim Absenden die Seite neu laden (und die Daten an eine URL schicken). Da wir aber eine Single Page Application (SPA) sind, wollen wir das nicht. `preventDefault()` verhindert das Standardverhalten des Browsers.
 - **Z. 14** Ein Kommentar im Code: Hier würde in einer echten Anwendung ein API-Call stehen. In der Demo wird das Absenden nur simuliert, es werden keine Daten verschickt.
 - **Z. 15** Setzt `sent` auf `true`. Dadurch wird sofort die Erfolgsmeldung angezeigt (siehe Z. 43).
@@ -125,9 +125,9 @@ Das klingt umständlich, hat aber einen großen Vorteil: Der State ist immer die
 
 ---
 
-## Warum ist das „kontrolliert"?
+## Warum ist das „kontrolliert“?
 
-Das Formular heißt „kontrolliert", weil React die volle Kontrolle über den Wert hat. Der Browser speichert den Wert nicht selbst, sondern fragt bei jedem Tastendruck React: „Was soll ich anzeigen?" Und React antwortet mit dem Wert aus dem State.
+Das Formular heißt „kontrolliert“, weil React die volle Kontrolle über den Wert hat. Der Browser speichert den Wert nicht selbst, sondern fragt bei jedem Tastendruck React: „Was soll ich anzeigen?“ Und React antwortet mit dem Wert aus dem State.
 
 Der Datenfluss sieht so aus:
 
@@ -166,4 +166,4 @@ Das ist eine Design-Entscheidung. Wenn die Erfolgsmeldung erscheint, ist das For
 2. Ändere die Zeit in `setTimeout` (Z. 16) von `4000` auf `10000` (10 Sekunden). Was passiert?
 3. Entferne testweise `e.preventDefault()` (Z. 13). Was passiert beim Absenden? (Die Seite lädt neu: Du siehst kurz ein Flackern, und der State wird zurückgesetzt.)
 4. Überlege: Was passiert, wenn du `value={form.name}` entfernst, aber `onChange` behältst? (Das Feld wird zu einem *unkontrollierten* Feld: Der Nutzer kann ganz normal tippen, und `handleChange` aktualisiert den State trotzdem. Das Feld wird aber nicht mehr vom State gesteuert, etwa beim Zurücksetzen. Umgekehrt, also `value` ohne `onChange`, wäre das Feld für den Nutzer schreibgeschützt, und React würde eine Warnung ausgeben. Deshalb gehören `value` und `onChange` bei kontrollierten Feldern immer zusammen.)
-5. Ergänze in `handleSubmit` die Zeile `setForm({ name: '', email: '', message: '' })`. Was siehst du, wenn das Formular nach der Erfolgsmeldung wieder erscheint? (Die Felder sind jetzt leer, weil der State die einzige „Wahrheit“ ist.) 
+5. Ergänze in `handleSubmit` die Zeile `setForm({ name: '', email: '', message: '' })`. Was siehst du, wenn das Formular nach der Erfolgsmeldung wieder erscheint? (Die Felder sind jetzt leer, weil der State die einzige „Wahrheit“ ist.)
