@@ -31,7 +31,7 @@ function About() {
                     <div className="is-card">
                         <span className="icon">🔗</span>
                         <h3>Integration</h3>
-                        <p>Nahtlose Einbindung in den gesamten Customer Journey – von der Vorbereitung bis zum Follow-up.</p>
+                        <p>Nahtlose Einbindung in die gesamte Customer Journey – von der Vorbereitung bis zum Follow-up.</p>
                     </div>
                     <div className="is-card">
                         <span className="icon">🛡️</span>
